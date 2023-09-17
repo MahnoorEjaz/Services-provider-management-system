@@ -71,14 +71,8 @@ function Header() {
                     </div>
                 </div>
                 <div>
-                {isSubmenu && (
-        <ul className="sub-menu">
-          <li>Sub-Menu Item 1</li>
-          <li>Sub-Menu Item 2</li>
-          {/* Add more sub-menu items as needed */}
-        </ul>
-      )}
-                </div>
+                    {isSubmenu && <Submenu />}
+                </div> 
             </nav>
         </>
     )
