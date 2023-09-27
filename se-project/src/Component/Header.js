@@ -6,6 +6,7 @@ import Logo from './Pic/logo.png';
 import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Submenu from './Submenu'
+import Login from './Footer/Login/Login_';
 
 
 
@@ -18,14 +19,19 @@ function Header() {
             backgroundColor: 'green',
         },
     };
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [isSubmenu, setSubmenu] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSubmenu, setSubmenu] = useState(false);
+    const [isOpenLogin, setLoging] = useState(false);
     const toggle = () => {
         setIsMenuOpen(!isMenuOpen)
     }
     const Submenu_ = () => {
         setSubmenu(!isSubmenu)
     }
+    const OpenLogin_ = () => {
+        setLoging(!isOpenLogin);
+    }
+
 
 
 
@@ -66,13 +72,15 @@ function Header() {
                         </ul>
                     </div>
                     <div className={`btn ${isMenuOpen && 'active'}`}>
-                        <Button sx={buttonStyle} variant="contained" >SignIN</Button>
-                        <Button sx={{ color: 'white', border: '2px solid #2471A3 ' }} variant="outlined">SignUP</Button>
+                        <Button sx={buttonStyle} variant="contained" onClick={OpenLogin_} >SignIN</Button>
+                        <Button sx={{ color: 'white', border: '2px solid #2471A3 ' }} onClick={OpenLogin_} variant="outlined">SignUP</Button>
                     </div>
                 </div>
                 <div>
                     {isSubmenu && <Submenu />}
-                </div> 
+                    {isOpenLogin && <Submenu />}
+                    
+                </div>
             </nav>
         </>
     )

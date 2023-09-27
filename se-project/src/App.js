@@ -4,7 +4,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ImageSlider from './Component/Slider';
 import AboutUs from './Component/About-Us';
 import Contactus from './Component/Contactus';
-import Feqs from './Component/Feq'
+import Feqs from './Component/Feq';
+import FooterOtherThanMap from './Component/Footer/FooterOtherThanMap';
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <AboutUs />
         <Contactus /> 
         <Feqs/>
+        <FooterOtherThanMap/> 
         <Routes>
           <Route path="/" component={<Header />} />
           <Route path="/services" component={<Header />} />

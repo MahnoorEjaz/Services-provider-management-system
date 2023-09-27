@@ -1,8 +1,11 @@
+
+
 .main-header {
   position: sticky;
   top: 0;
   min-height: 70px;
   z-index: 100;
+  /* margin-bottom: 50px; */
 }
 
 .Head-main-app {
@@ -22,7 +25,7 @@
   left: 480px;
 
 }
-
+/* a:actibe */
 .Menu-bar {
   display: none;
 }
@@ -104,12 +107,89 @@
   margin-left: 100px;
 } 
 .Contant p:hover{
-   background-color: #35a400cc;;
+   background-color: #35a400cc;
 }
 .About-img{
   margin-top: -25px;
   margin-left: 200px;
 }
+
+.Contact-Us{
+   color: white;
+}
+.Contact-Us li{
+   text-decoration: none;
+   list-style: none;
+   color: white;
+}
+
+.Icoan-Footer{
+  font-size: 25px;
+  color: white;
+  margin-right: 10px;
+  transition: all 0.5s  ease-in-out;  
+}
+.Icoan-Footer:hover{
+  color: #145ca9;
+}
+.Contact-Us li a{
+  color: white;
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+  margin-left: 0px;
+  font-size: large;
+}
+.Contact-Us li a:hover{
+  transform: translateY(-10px);
+  margin-left: 5px;
+  color: #145ca9;
+}
+
+.Quiks-Links ul {
+    list-style: none;
+}
+
+.Quiks-Links ul li {
+  margin-top: 5px;
+}
+
+.Quiks-Links ul li a {
+   text-decoration: none;
+   color: white;
+   margin-left: 0;
+   transition: all 0.5s ease-in-out;
+   font-size: large;
+}
+
+.Quiks-Links ul li a:hover{
+  color: #145ca9;
+  margin-left: 5px;
+  text-decoration: underline; 
+}
+
+.Social-Medias {
+  display: flex;
+  justify-content: center; /* Horizontally center the icons */
+  gap: 10px; /* Adjust the space between icons as needed */
+  justify-content: space-around;
+}
+
+.Social-Medias ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.social-icons-list li  {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+
 
 
 
