@@ -6,11 +6,11 @@ import Logo from './Pic/logo.png';
 import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Submenu from './Submenu'
-import Login from './Login/Login_';
+import LoginForm from './Login/Login_';
 
 
 
-function Header({ handleLoginClick }) {
+function Header() {
     const buttonStyle = {
         marginRight: '10px',
         backgroundColor: '#2471A3 ',
@@ -21,15 +21,18 @@ function Header({ handleLoginClick }) {
     };
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSubmenu, setSubmenu] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [showtext , setshowtext] = useState();
     const toggle = () => {
         setIsMenuOpen(!isMenuOpen)
     }
     const Submenu_ = () => {
         setSubmenu(!isSubmenu)
     }
-    const handleClick = () => {
-        handleLoginClick();
-    };
+    function togglePopup(data) {
+        setIsOpen(!isOpen);
+        setshowtext(data)
+    }
 
 
 
@@ -70,13 +73,13 @@ function Header({ handleLoginClick }) {
                         </ul>
                     </div>
                     <div className={`btn ${isMenuOpen && 'active'}`}>
-                        <Button sx={buttonStyle} variant="contained" onClick={handleClick} >SignIN</Button>
-                        <Button sx={{ color: 'white', border: '2px solid #2471A3 ' }} variant="outlined">SignUP</Button>
+                    <Button sx={buttonStyle} variant="contained" onClick={() => togglePopup('singin')} >SignIN</Button>
+                        <Button sx={{ color: 'white', border: '2px solid #2471A3 ' }} onClick={()=>togglePopup('singup')}   variant="outlined">SignUP</Button>
                     </div>
                 </div>
                 <div>
                     {isSubmenu && <Submenu />}
-                    {/* {isOpenLogin && <Login />} */}
+                    {isOpen && <LoginForm handleClose={togglePopup }  Whichshow={showtext}/>}
 
                 </div>
             </nav>
@@ -84,4 +87,4 @@ function Header({ handleLoginClick }) {
     )
 }
 
-export default Header
+export default Header 
