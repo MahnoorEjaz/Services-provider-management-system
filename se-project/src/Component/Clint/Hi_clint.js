@@ -5,7 +5,7 @@ import Clint_Slider from './Clint_Slider'
 function Hi_clint() {
     return (
         <>
-            <div className='Hi-clint'>
+            <div >
                 <Grid container spacing={5}>
                     <Grid item xs={12} md={6} lg={6}>
                         <div className='Name' >

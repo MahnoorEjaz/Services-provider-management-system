@@ -7,9 +7,8 @@ import Contactus from './Component/Contactus';
 import Feqs from './Component/Feq';
 import FooterOtherThanMap from './Component/Footer/FooterOtherThanMap';
 import LoginForm from './Component/Login/Login_';
-import Header_Clint from './Component/Clint/Clint'
+import Clint_Complete from './Component/Clint/Clint_Complete';
 import { useState } from 'react';
-import Hi_clint from './Component/Clint/Hi_clint';
 
 
 
@@ -22,9 +21,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header_Clint/>
-        <Hi_clint/>
-
+        <Clint_Complete />
         {/* below is the content for the home page  */}
         {/* <Header /> */}
         {/* <ImageSlider />
@@ -37,7 +34,7 @@ function App() {
           <Route path="/services" component={<Header />} />
         </Routes>
       </Router>
-    </> 
+    </>
   );
 }
 

@@ -15,6 +15,26 @@
      margin-left: -350px;
      margin-right: 200px; 
 }
+
+.Clint-top-{
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    margin-right: 105px;
+}
+.Clint-top- li{
+    margin-right: 10px;
+    display: flex;
+}
+.Clint-top- li a{
+    color: rgba(98, 100, 106, 1);
+    text-decoration: none;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+
+
 @media only screen and (max-width: 600px) {
     .clint-slider{
         margin: 0px;
