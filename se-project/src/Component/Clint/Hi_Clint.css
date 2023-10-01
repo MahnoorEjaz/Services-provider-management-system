@@ -1,0 +1,25 @@
+.Name {
+    text-align: center;
+    background-color: rgba(250, 250, 250, 1);
+    max-width: 267.4px;
+    max-height: 153.6px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+
+}
+.Hi-clint {
+    margin-left: 15%;
+    margin-top: 10px;
+}
+.clint-slider{
+     margin-left: -350px;
+     margin-right: 200px; 
+}
+@media only screen and (max-width: 600px) {
+    .clint-slider{
+        margin: 0px;
+        margin-right: 50px;
+         
+
+    }
+}  

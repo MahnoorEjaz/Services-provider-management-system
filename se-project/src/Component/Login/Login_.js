@@ -48,5 +48,5 @@ function  Popup({handleClose,Whichshow}){
     </div>
   );
 };
-
+ 
 export default Popup; 

@@ -7,7 +7,9 @@ import Contactus from './Component/Contactus';
 import Feqs from './Component/Feq';
 import FooterOtherThanMap from './Component/Footer/FooterOtherThanMap';
 import LoginForm from './Component/Login/Login_';
+import Header_Clint from './Component/Clint/Clint'
 import { useState } from 'react';
+import Hi_clint from './Component/Clint/Hi_clint';
 
 
 
@@ -20,34 +22,22 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
-        {/* <LoginForm isShowLogin={isShowLogin} /> */}
-        <ImageSlider />
+        <Header_Clint/>
+        <Hi_clint/>
+
+        {/* below is the content for the home page  */}
+        {/* <Header /> */}
+        {/* <ImageSlider />
         <AboutUs />
         <Contactus />
         <Feqs />
-        <FooterOtherThanMap />
-        <div>
-          <input
-            type="button"
-            value="Click to Open Popup"
-            onClick={togglePopup}
-          />
-          {isOpen && <LoginForm
-            content={<>
-              <b>Design your Popup</b>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <button>Test button</button>
-            </>}
-            handleClose={togglePopup}
-          />}
-        </div>
+        <FooterOtherThanMap /> */}
         <Routes>
           <Route path="/" component={<Header />} />
           <Route path="/services" component={<Header />} />
         </Routes>
       </Router>
-    </>
+    </> 
   );
 }
 

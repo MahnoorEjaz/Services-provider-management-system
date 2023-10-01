@@ -1,11 +1,8 @@
-
-
 .main-header {
   position: sticky;
   top: 0;
   min-height: 70px;
   z-index: 100;
-  /* margin-bottom: 50px; */
 }
 
 .Head-main-app {
@@ -23,8 +20,8 @@
   width: 100px;
   position: absolute;
   left: 480px;
-
 }
+
 /* a:actibe */
 .Menu-bar {
   display: none;
@@ -32,7 +29,6 @@
 
 .nav-elements ul {
   list-style: none;
-  /* margin-left: 20%; */
   display: flex;
 }
 
@@ -57,11 +53,74 @@
   color: #145ca9;
 }
 
-
 .btn {
   margin: 10px;
   margin-left: 35%;
 }
+
+/* style for the clint side Header  */
+.main-header-clint {
+  position: sticky;
+  top: 0;
+  min-height: 70px;
+  z-index: 100;
+}
+
+.Head-main-app-clint {
+  display: flex;
+  background-color: white;
+  border-bottom: 1px solid rgb(87, 78, 78);
+}
+
+.logo-clint img {
+  width: 100px;
+  height: 50px;
+  margin-left: 220%;
+}
+
+.Menu-bar-clint {
+  display: none;
+}
+
+.nav-elements-clint {
+  margin-left: 15%;
+}
+
+.nav-elements-clint ul {
+  list-style: none;
+  display: flex;
+}
+
+.nav-elements-clint ul li {
+  margin-left: 25px;
+}
+
+.nav-elements-clint ul li a {
+  text-decoration: none;
+  margin-left: 5px;
+  color: rgba(98, 100, 106, 1);
+  font-size: large;
+  font-family: system-ui;
+}
+
+.nav-elements-clint ul li input {
+  min-width: 550px;
+  min-height: 35px;
+  margin-top: -5px;
+  color: rgba(98, 100, 106, 1);
+  border: 1px solid;
+  font-family: system-ui;
+}
+
+
+
+
+
+
+
+
+/* clint navbar end hear  */
+
 
 
 .services-cantainer li {
@@ -94,7 +153,8 @@
   height: 600px;
   margin-top: -13px;
 }
-.Contant p{
+
+.Contant p {
   border: 2px solid rgb(117, 215, 117);
   width: 400px;
   background-color: #40a9ff;
@@ -105,48 +165,54 @@
   transition: all 0.5s ease-in-out;
   box-shadow: 0px 4px 6px #35a400cc;
   margin-left: 100px;
-} 
-.Contant p:hover{
-   background-color: #35a400cc;
 }
-.About-img{
+
+.Contant p:hover {
+  background-color: #35a400cc;
+}
+
+.About-img {
   margin-top: -25px;
   margin-left: 200px;
 }
 
-.Contact-Us{
-   color: white;
-}
-.Contact-Us li{
-   text-decoration: none;
-   list-style: none;
-   color: white;
+.Contact-Us {
+  color: white;
 }
 
-.Icoan-Footer{
+.Contact-Us li {
+  text-decoration: none;
+  list-style: none;
+  color: white;
+}
+
+.Icoan-Footer {
   font-size: 25px;
   color: white;
   margin-right: 10px;
-  transition: all 0.5s  ease-in-out;  
+  transition: all 0.5s ease-in-out;
 }
-.Icoan-Footer:hover{
+
+.Icoan-Footer:hover {
   color: #145ca9;
 }
-.Contact-Us li a{
+
+.Contact-Us li a {
   color: white;
   text-decoration: none;
   transition: all 0.5s ease-in-out;
   margin-left: 0px;
   font-size: large;
 }
-.Contact-Us li a:hover{
+
+.Contact-Us li a:hover {
   transform: translateY(-10px);
   margin-left: 5px;
   color: #145ca9;
 }
 
 .Quiks-Links ul {
-    list-style: none;
+  list-style: none;
 }
 
 .Quiks-Links ul li {
@@ -154,23 +220,25 @@
 }
 
 .Quiks-Links ul li a {
-   text-decoration: none;
-   color: white;
-   margin-left: 0;
-   transition: all 0.5s ease-in-out;
-   font-size: large;
+  text-decoration: none;
+  color: white;
+  margin-left: 0;
+  transition: all 0.5s ease-in-out;
+  font-size: large;
 }
 
-.Quiks-Links ul li a:hover{
+.Quiks-Links ul li a:hover {
   color: #145ca9;
   margin-left: 5px;
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 
 .Social-Medias {
   display: flex;
-  justify-content: center; /* Horizontally center the icons */
-  gap: 10px; /* Adjust the space between icons as needed */
+  justify-content: center;
+  /* Horizontally center the icons */
+  gap: 10px;
+  /* Adjust the space between icons as needed */
   justify-content: space-around;
 }
 
@@ -180,7 +248,7 @@
   display: flex;
 }
 
-.social-icons-list li  {
+.social-icons-list li {
   margin: 0;
   padding: 0;
 }
@@ -196,6 +264,7 @@
   top: 0;
   left: 0;
 }
+
 .box {
   position: relative;
   width: 35%;
@@ -209,6 +278,7 @@
   border: 1px solid #999;
   overflow: auto;
 }
+
 .close-icon {
   content: 'x';
   cursor: pointer;
@@ -225,10 +295,10 @@
   font-size: 20px;
 }
 
-.google{
+.google {
   /* style={{ backgroundColor: 'red', color: 'white', minWidth: '150px', marginLeft: '50px' }} */
-  
-/*  */
+
+  /*  */
 }
 
 
@@ -301,6 +371,35 @@
     margin: 10px;
   }
 
+  /* for the clint side header bar  */
+  .logo-clint img {
+     margin-left: -10px;
+  }
+  .Menu-bar-clint {
+    display: block;
+    cursor: pointer;
+    margin-left: 255px;
+  }
+  .nav-elements-clint {
+    position: absolute;
+    right: 0;
+    width: 0;
+    top: 30px;
+    transition: all 0.3s ease-in;
+    overflow: hidden;
+  }
+  .nav-elements-clint.active {
+    width: 300px;
+    background-color: #fff;
+  }
+  .nav-elements-clint ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-elements-clint ul li {
+    margin: 10px;
+  }
+/* clint side header is end */
   .btn {
     position: absolute;
     right: 0;
@@ -323,18 +422,20 @@
     height: 300px;
     margin-top: -13px;
   }
-  .Contant p{
+
+  .Contant p {
     margin: 5px;
   }
-  .About-img{
+
+  .About-img {
     margin-top: -25px;
     margin-left: 0px;
   }
-   
- 
-  
 
- 
+
+
+
+
 
 
 
