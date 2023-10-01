@@ -1,54 +1,44 @@
 import * as React from 'react';
 import CardContent from '@mui/joy/CardContent';
-import Typography from '@mui/joy/Typography';
 import SimpleImageSlider from 'react-simple-image-slider'
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
-import P1 from '../Pic/P4.jpg'
-import P2 from '../Pic/Gig.png'
-import P3 from '../Pic/Capture1.PNG'
-import P4 from '../Pic/p2.PNG'
 import Avatar from '@mui/material/Avatar';
-import { deepPurple } from '@mui/material/colors';
-import { CardMedia } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
+import { CardMedia, Divider } from '@mui/material';
+import { FaHeart } from 'react-icons/fa';
 
 
-export default function BasicCard() {
+export default function BasicCard({ CardData }) {
 
-    const sliderImages = [
-        {
-            url: P1,
-        },
-        {
-            url: P2,
-        },
-        {
-            url: P3,
-        },
-        {
-            url: P4,
-        },
-    ];
-    //     <div>
-    //     {/* <Typography level="title-lg">Yosemite National Park</Typography> */}
-    //     {/* <Typography level="body-sm">April 24 to May 02, 2021</Typography> */}
-    // </div>
+   
+    const ViewData = () => {
+        alert('View Fuction is called with the Card Data');
+    }
     return (
-        <div className='Saller-Card' style={{ maxWidth: '340px' }}>
+        <div className='Saller-Card' style={{ maxWidth: '300px', cursor: 'pointer' }} >
             <CardMedia>
-                <SimpleImageSlider
-                    width={340}
-                    height={200}
-                    images={sliderImages}
-                    showBullets={true}
-                />
+                <SimpleImageSlider width={300} height={200} images={CardData.url} showBullets={true} />
             </CardMedia>
-            <CardContent sx={{border:'1px solid rgba(34, 35, 37, 1)'}}>
+            <CardContent sx={{ border: '1px solid rgba(34, 35, 37, 1)', borderTop: '1px solid white' }}>
                 <div style={{ display: 'flex' }}>
-                    <Avatar sx={{ bgcolor: 'rgba(29, 191, 115, 1)', marginTop: '10px' }}>S</Avatar>
-                    <p style={{ marginLeft: '10px' }}>Saleemalik9970<br /><span style={{ color: 'rgba(255, 190, 91, 1)' }}>Top Rated Saller</span></p>
+                    <Avatar sx={{ bgcolor: 'rgba(29, 191, 115, 1)', marginTop: '10px' }}>{CardData.Name[0]}</Avatar>
+                    <p style={{ marginLeft: '10px' }}>{CardData.Name}<br /><span style={{ color: 'rgba(255, 190, 91, 1)' }}>Top Rated Saller</span></p>
                 </div>
-                <p style={{ marginLeft: '5px',marginTop:'-10px', }}>I will design UI UX for mobile app with figma for ios or android</p>
-            </CardContent> 
+                <a className='service-tittel' href='#' onClick={ViewData}> {CardData.tittle} </a>
+                <div style={{ display: 'flex' }}>
+                    <StarIcon style={{ color: 'rgba(255, 190, 91, 1)' }} />
+                    <p style={{ marginTop: '2px', marginLeft: '5px', color: 'rgba(255, 190, 91, 1)' }}>{CardData.Rating}<span style={{ marginLeft: '5px', color: 'rgba(181, 182, 186, 1)' }}>({CardData.Orders})</span></p>
+                </div>
+                <Divider />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <FaHeart style={{ marginTop: '40px', marginLeft: '5px', color: 'rgba(116, 118, 126, 1)', fontSize: '20px' }} onClick={() => { }} />
+                    <div>
+                        <p style={{ color: 'rgba(116, 118, 126, 1)' }}>
+                            Started At <br />
+                            {CardData.Price}
+                        </p>
+                    </div>
+                </div>
+            </CardContent>
         </div>
     );
 }
