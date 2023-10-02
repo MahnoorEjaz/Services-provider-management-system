@@ -18,17 +18,17 @@ const FooterOtherThanMap = () => {
         window.location.href = whatsappUrl;
     };
     return (
-        <div style={{ backgroundColor: '#92b9ff', marginTop: '300px' }}>
+        <div style={{  marginTop: '300px' }}>
             <Grid container spacing={1}>
                 <Grid item xs={12} sm={6} md={3}>
                     <div>
-                        <h2 style={{ color: '#145ca9' }}>Location</h2>
+                        <p style={{ color: 'rgba(64, 65, 69, 1)' }}>Location</p>
                         <Map />
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <div className='Contact-Us' style={{ marginLeft: '20px' }}>
-                        <h2 style={{ color: '#145ca9' }}>Contact Us</h2>
+                        <p style={{ color: 'rgba(64, 65, 69, 1)' }}>Contact Us</p>
                         <p>If you have any questions or feedback, please feel free to contact us:</p>
                         <ul >
                             <li><FaEnvelope className='Icoan-Footer' /><a href="mailto:saleemalik444@gmail.com">Saleemalik444@gmail.com</a></li>
@@ -46,7 +46,7 @@ const FooterOtherThanMap = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <div className='Quiks-Links'>
-                        <h2 style={{ color: '#145ca9' }}>Company</h2>
+                        <p style={{ color: 'rgba(64, 65, 69, 1)' }}>Company</p>
                         <ul>
                             <li>
                                 <a href='#'  >  Subscribe
@@ -76,7 +76,7 @@ const FooterOtherThanMap = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <div className='Quiks-Links'>
-                        <h2 style={{ color: '#145ca9' }}>Quick Links</h2>
+                        <p style={{ color: 'rgba(64, 65, 69, 1)' }}>Quick Links</p>
                         <ul>
                             <li>
                                 <a href='#'  >  Home</a>
@@ -103,7 +103,7 @@ const FooterOtherThanMap = () => {
                     </div>
                 </Grid>
             </Grid>
-            <h2 style={{ color: '#145ca9',textAlign:'center' }}>Follow Us</h2>
+            <p style={{ color: 'rgba(64, 65, 69, 1)',textAlign:'center' }}>Follow Us</p>
             <div className='Social-Medias'>
                 <ul >
                     <li>

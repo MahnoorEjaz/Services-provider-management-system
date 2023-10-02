@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sellar_Cart from '../Saller/Sellar_Cart';
+import Sellar_Card from '../Saller/Sellar_Cart';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
@@ -9,6 +9,7 @@ import P1 from '../Pic/P4.jpg'
 import P2 from '../Pic/Gig.png'
 import P3 from '../Pic/Capture1.PNG'
 import P4 from '../Pic/p2.PNG'
+import { Grid } from '@mui/material';
 
 
 const Top_Rated_slider = () => {
@@ -70,54 +71,26 @@ const Top_Rated_slider = () => {
             Name: 'LangMaster',
         },
     ];
-    const carouselItems = carddata.map((data, index) => (
-        <div key={index}>
-            <Sellar_Cart CardData={data} />
-        </div>
-    ));
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5,
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 4,
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 3,
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-        },
-    };
 
-    const CustomButtonGroup = ({ next, previous }) => (
-        <div className="custom-button-group" style={{margin:'10px'}}>
-            <button className='btn-custom' style={{marginRight:'10px' , borderRadius:'50%',textAlign:'center'}} onClick={previous}>
-                <ArrowBackIosIcon onClick={previous} />
-            </button>
-            <button className='btn-custom' style={{marginRight:'10px' , borderRadius:'50%',textAlign:'center'}} onClick={next}>
-                <ArrowForwardIosIcon  onClick={next} />
-            </button>
-        </div>
-    );
+
     return (
-        <div style={{ marginRight: '50px', border: '1px solid rgba(34, 35, 37, 1) ', padding: '10px',marginBottom:'10px' }}>
-            <p> <FaArrowRight style={{marginRight:'5px'}}/>Top Rated Services</p>
-            <Carousel
-                responsive={responsive}
-                infinite={true}
-                swipeable={true}
-                arrows={false}
-                draggable={true}
-                renderButtonGroupOutside={true}
-                customButtonGroup={<CustomButtonGroup />}
-            >
-                {carouselItems}
-            </Carousel>
+        <div style={{ marginRight: '50px', border: '1px solid rgba(34, 35, 37, 1) ', padding: '10px', marginBottom: '10px' }}>
+            <p> <FaArrowRight style={{ marginRight: '5px' }} />Services You liked</p>
+            <Grid container>
+                {
+                    carddata.map((card, index) => {
+                        return (
+                            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                                <Sellar_Card CardData={card} />
+                            </Grid>
+                        );
+                    } 
+                    )
+                }
+
+            </Grid>
+
+
         </div>
     );
 

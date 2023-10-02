@@ -2,22 +2,19 @@
     text-align: center;
     background-color: rgba(250, 250, 250, 1);
     max-width: 267.4px;
-    max-height: 153.6px;
+    height: 250px;
     padding-bottom: 30px;
     padding-top: 30px;
 
 }
-
 .Hi-clint {
-    margin-left: 10%;
+    margin-left: 5%;
     margin-top: 10px;
 }
-
 .clint-slider {
     margin-left: -350px;
-    margin-right: 200px;
+    margin-right: 50px;
 }
-
 .Clint-top- {
     display: flex;
     list-style: none;
@@ -54,20 +51,58 @@
 .custom-button-group {
     text-align: end;
 }
-.btn-custom{
-    background-color:rgba(245, 245, 245, 1);
-    
+
+.btn-custom {
+    background-color: rgba(245, 245, 245, 1);
+    box-shadow: 0 4px 6px rgba(245, 245, 245, 1);
 }
 
 
 
+/* Define CSS styles for different screen sizes using a similar object structure */
+/* Note: You can adjust the breakpoint values and styles as needed */
 
+/* Super Large Desktop */
+@media only screen and (min-width: 3000px) {
+    /* Add your styles here */
+}
 
-@media only screen and (max-width: 600px) {
+/* Desktop */
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+    .clint-slider {
+        margin-left: -300px;
+        margin-right: 50px;
+    }
+    .Hi-clint {
+        margin-left: 10%;
+        margin-top: 10px;
+        margin-right: -20%;
+    }
+}
+
+/* Tablet */
+@media only screen and (min-width: 464px) and (max-width: 1024px) {
+    .clint-slider {
+        margin-left: -150px;
+        /* margin-right: 50px; */
+    }
+    .Hi-clint {
+        margin-left: 19%;
+        margin-top: 10px;
+        margin-right: -60%;
+    }
+}
+
+/* Mobile */
+@media only screen and (max-width: 464px) {
     .clint-slider {
         margin: 0px;
         margin-right: 50px;
+    }
 
-
+    .Hi-clint {
+        margin-left: 10%;
+        margin-top: 10px;
+        margin-right: -10%;
     }
 }

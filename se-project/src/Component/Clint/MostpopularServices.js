@@ -95,18 +95,18 @@ const Top_Rated_slider = () => {
     };
 
     const CustomButtonGroup = ({ next, previous }) => (
-        <div className="custom-button-group" style={{margin:'10px'}}>
-            <button className='btn-custom' style={{marginRight:'10px' , borderRadius:'50%',textAlign:'center'}} onClick={previous}>
+        <div className="custom-button-group" style={{ margin: '10px' }}>
+            <button className='btn-custom' style={{ marginRight: '10px', borderRadius: '50%', textAlign: 'center' }} onClick={previous}>
                 <ArrowBackIosIcon onClick={previous} />
             </button>
-            <button className='btn-custom' style={{marginRight:'10px' , borderRadius:'50%',textAlign:'center'}} onClick={next}>
-                <ArrowForwardIosIcon  onClick={next} />
+            <button className='btn-custom' style={{ marginRight: '10px', borderRadius: '50%', textAlign: 'center' }} onClick={next}>
+                <ArrowForwardIosIcon onClick={next} />
             </button>
         </div>
     );
     return (
-        <div style={{ marginRight: '50px', border: '1px solid rgba(34, 35, 37, 1) ', padding: '10px',marginBottom:'10px' }}>
-            <p> <FaArrowRight style={{marginRight:'5px'}}/>Top Rated Services</p>
+        <div style={{ marginRight: '50px', border: '1px solid rgba(34, 35, 37, 1) ', padding: '10px' }}>
+            <p> <FaArrowRight style={{ marginRight: '5px' }} />Most popular  Servicess</p>
             <Carousel
                 responsive={responsive}
                 infinite={true}

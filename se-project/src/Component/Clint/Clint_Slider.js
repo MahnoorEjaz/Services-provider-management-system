@@ -26,7 +26,7 @@ export default function App() {
     <div  ref={ref} className="clint-slider"  >
       <SimpleImageSlider
         width={width}
-        height={200} 
+        height={300} 
         images={sliderImages}
         showBullets={true}
         // showNavs={true}

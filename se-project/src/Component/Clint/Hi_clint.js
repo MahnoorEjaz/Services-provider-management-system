@@ -7,7 +7,7 @@ function Hi_clint() {
         <>
             <div >
                 <Grid container spacing={5}>
-                    <Grid item xs={12} md={6} lg={6}>
+                    <Grid item xs={12} sm={6} md={6} lg={6}>
                         <div className='Name' >
                             <h2>
                                 Hi There
@@ -20,7 +20,7 @@ function Hi_clint() {
                             </Button>
                         </div>
                     </Grid>
-                    <Grid item xs={12} md={6} lg={6}>
+                    <Grid item xs={12} sm={6} md={6} lg={6}>
                         <Clint_Slider />
                     </Grid>
                 </Grid>

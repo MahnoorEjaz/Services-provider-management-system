@@ -188,17 +188,17 @@
 
 .Icoan-Footer {
   font-size: 25px;
-  color: white;
+  color:rgba(64, 65, 69, 1);
   margin-right: 10px;
   transition: all 0.5s ease-in-out;
 }
 
 .Icoan-Footer:hover {
-  color: #145ca9;
+  color:rgba(29, 191, 115, 1);
 }
 
 .Contact-Us li a {
-  color: white;
+  color:rgba(64, 65, 69, 1);
   text-decoration: none;
   transition: all 0.5s ease-in-out;
   margin-left: 0px;
@@ -208,7 +208,7 @@
 .Contact-Us li a:hover {
   transform: translateY(-10px);
   margin-left: 5px;
-  color: #145ca9;
+  color: rgba(29, 191, 115, 1);
 }
 
 .Quiks-Links ul {
@@ -221,14 +221,14 @@
 
 .Quiks-Links ul li a {
   text-decoration: none;
-  color: white;
+  color:rgba(64, 65, 69, 1);
   margin-left: 0;
   transition: all 0.5s ease-in-out;
   font-size: large;
 }
 
 .Quiks-Links ul li a:hover {
-  color: #145ca9;
+  color:rgba(29, 191, 115, 1);
   margin-left: 5px;
   text-decoration: underline;
 }

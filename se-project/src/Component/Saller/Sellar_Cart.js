@@ -33,7 +33,7 @@ export default function BasicCard({ CardData }) {
 
     return (
 
-        <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)' }}>
+        <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)',margin:'5px' }}>
             <CardMedia >
                 <div onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}>
