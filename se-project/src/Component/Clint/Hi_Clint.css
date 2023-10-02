@@ -7,47 +7,67 @@
     padding-top: 30px;
 
 }
+
 .Hi-clint {
-    margin-left: 15%;
+    margin-left: 10%;
     margin-top: 10px;
 }
-.clint-slider{
-     margin-left: -350px;
-     margin-right: 200px; 
+
+.clint-slider {
+    margin-left: -350px;
+    margin-right: 200px;
 }
 
-.Clint-top-{
+.Clint-top- {
     display: flex;
     list-style: none;
     justify-content: space-around;
     margin-right: 105px;
 }
-.Clint-top- li{
+
+.Clint-top- li {
     margin-right: 10px;
     display: flex;
 }
-.Clint-top- li a{
+
+.Clint-top- li a {
     color: rgba(98, 100, 106, 1);
     text-decoration: none;
     margin-left: 30px;
     cursor: pointer;
 }
-.service-tittel{
+
+.service-tittel {
     text-decoration: none;
     margin-left: 5px;
     margin-top: -10px;
     color: rgba(116, 118, 126, 1);
 }
-.service-tittel:hover{
+
+.service-tittel:hover {
     text-decoration: underline;
 }
 
 
+
+/* Custom CSS for arrow positions */
+.custom-button-group {
+    text-align: end;
+}
+.btn-custom{
+    background-color:rgba(245, 245, 245, 1);
+    
+}
+
+
+
+
+
 @media only screen and (max-width: 600px) {
-    .clint-slider{
+    .clint-slider {
         margin: 0px;
         margin-right: 50px;
-         
+
 
     }
-}  
+}

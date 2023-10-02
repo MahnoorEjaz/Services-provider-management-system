@@ -39,7 +39,7 @@ const Clint_Services = () => {
                     <div>
                     </div>
                 </Grid>
-                <hr style={{marginRight:'15%'}}></hr>
+                <hr style={{marginRight:'3.5%'}}></hr>
             </div>
         </>
     )

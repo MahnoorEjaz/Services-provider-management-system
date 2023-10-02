@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Sellar_Cart from '../Saller/Sellar_Cart';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import P1 from '../Pic/P4.jpg'
 import P2 from '../Pic/Gig.png'
 import P3 from '../Pic/Capture1.PNG'
@@ -92,20 +94,34 @@ const Top_Rated_slider = () => {
         },
     };
 
-    return (
-       <div style={{marginRight:'50px'}}>
-        <p> <FaArrowRight/>Top Rated Services</p>
-         <Carousel
-            responsive={responsive}
-            infinite={true}
-            // showDots={true}
-            swipeable={true}
-            draggable={true}
-        >
-            {carouselItems}
-        </Carousel>
-       </div>
+    const CustomButtonGroup = ({ next, previous }) => (
+        <div className="custom-button-group" style={{margin:'10px'}}>
+            <button className='btn-custom' style={{marginRight:'10px' , borderRadius:'50%',textAlign:'center'}} onClick={previous}>
+                <ArrowBackIosIcon onClick={previous} />
+            </button>
+            <button className='btn-custom' style={{marginRight:'10px' , borderRadius:'50%',textAlign:'center'}} onClick={next}>
+                <ArrowForwardIosIcon  onClick={next} />
+            </button>
+        </div>
     );
+    return (
+        <div style={{ marginRight: '50px', border: '1px solid rgba(34, 35, 37, 1) ', padding: '5px' }}>
+            <p> <FaArrowRight />Top Rated Services</p>
+            <Carousel
+                responsive={responsive}
+                infinite={true}
+                swipeable={true}
+                arrows={false}
+                draggable={true}
+                renderButtonGroupOutside={true}
+                customButtonGroup={<CustomButtonGroup />}
+            >
+                {carouselItems}
+            </Carousel>
+        </div>
+    );
+
+
 };
 
 export default Top_Rated_slider;
