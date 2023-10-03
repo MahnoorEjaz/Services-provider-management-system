@@ -29,23 +29,23 @@ function Header() {
                                 <input type='text' placeholder='What service are you looking for today?' />
                             </li>
                             <li>
-                                <Link to="/AboutUs"><IoNotifications /></Link>
+                                <Link to="/Notifications"><IoNotifications /></Link>
                             </li>
                             <li>
-                                <Link to="/ContactUs"> <FaHeart /></Link>
+                                <Link to="/like"> <FaHeart /></Link>
                             </li>
                             <li>
-                                <Link to="/FEQS"><MailOutlineIcon /></Link>
+                                <Link to="/Inbox"><MailOutlineIcon /></Link>
                             </li>
                             <li>
-                                <Link to="/Services"  >Orders </Link>
+                                <Link to="/orders"  >Orders </Link>
 
                             </li>
                             <li>
-                                <Link to="/FeedBack" style={{color:'rgba(29, 191, 115, 1)'}}>Become a Seller</Link>
+                                <Link to="/seller" style={{ color: 'rgba(29, 191, 115, 1)' }}>Become a Seller</Link>
                             </li>
                             <li>
-                                <Link to="/Complains"><Avatar style={{marginTop:'-30px'}}/></Link>
+                                <Link to="/profile"><Avatar style={{ marginTop: '-30px' }} /></Link>
                             </li>
                         </ul>
                     </div>

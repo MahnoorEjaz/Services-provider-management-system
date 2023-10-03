@@ -1,8 +1,13 @@
 import React from 'react'
 
 const Gig_View = () => {
+
   return (
-    <div>Gig_View</div>
+     <>
+     <h1 style={{marginTop:'1000px'}}>
+      hello world 
+     </h1>
+     </>
   )
 }
 

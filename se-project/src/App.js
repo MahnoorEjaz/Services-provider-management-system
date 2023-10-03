@@ -9,8 +9,7 @@ import FooterOtherThanMap from './Component/Footer/FooterOtherThanMap';
 import LoginForm from './Component/Login/Login_';
 import Clint_Complete from './Component/Clint/Clint_Complete';
 import { useState } from 'react';
-
-
+import Header_Clint from './Component/Clint/Clint';
 
 
 function App() {
@@ -18,22 +17,34 @@ function App() {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
+
   return (
     <>
       <Router>
-        <Clint_Complete />
-        {/* below is the content for the home page  */}
-        {/* <Header /> */}
-        {/* <ImageSlider />
+        <Header_Clint />
+        <Routes>
+          <Route path="/" element={<Clint_Complete />} />
+          <Route path="/seller" element={<Feqs />} />
+          {/* <Route path='/View'  element= {'View gig '}/> */}
+        </Routes>
+      </Router>
+
+
+
+
+
+
+      {/* here is the code for the landing page  */}
+      {/* <Clint_Complete /> */}
+      {/* The content for the home page */}
+      {/* Uncomment these lines to include the components */}
+      {/* <Header />
+        <ImageSlider />
         <AboutUs />
         <Contactus />
         <Feqs />
         <FooterOtherThanMap /> */}
-        <Routes>
-          <Route path="/" component={<Header />} />
-          <Route path="/services" component={<Header />} />
-        </Routes>
-      </Router>
+
     </>
   );
 }
