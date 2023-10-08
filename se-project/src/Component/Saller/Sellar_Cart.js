@@ -6,14 +6,18 @@ import StarIcon from '@mui/icons-material/Star';
 import { CardMedia, Divider } from '@mui/material';
 import { FaHeart } from 'react-icons/fa';
 import { useState } from 'react';
-import Gig_View from '../Clint/Gig_View';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
+import { AppContext } from '../../App';
 
 export default function BasicCard({ CardData }) {
 
-    const ViewData = () => {
-        <Gig_View/>
-    }
+    const {Current_Service, Set_Current_Service}= React.useContext(AppContext);
+    const ViewData = () => { 
+        Set_Current_Service(CardData);
+    } 
+
+
+    
     const [showNavs_, setnav] = React.useState(false)
     const [liked, setLiked] = useState(false);
     const handleMouseEnter = () => {
@@ -21,7 +25,7 @@ export default function BasicCard({ CardData }) {
     }
     const handleMouseLeave = () => {
         setnav(false);
-    }
+    } 
     const toggleLike = () => {
         setLiked(!liked);
     };
@@ -31,23 +35,21 @@ export default function BasicCard({ CardData }) {
         marginTop: '20px',
         color: iconColor,
     };
-
-
     return (
 
-        <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)',margin:'5px' }}>
+        <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', margin: '5px' }}>
             <CardMedia >
                 <div onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}>
                     <SimpleImageSlider width={300} height={200} images={CardData.url} showBullets={true} showNavs={showNavs_} />
-                </div>
-            </CardMedia>
+                </div> 
+            </CardMedia> 
             <CardContent sx={{ border: '1px solid rgba(34, 35, 37, 1)', borderTop: '1px solid white', height: '150%' }}>
                 <div style={{ display: 'flex' }}>
                     <Avatar sx={{ bgcolor: 'rgba(29, 191, 115, 1)', marginTop: '10px' }}>{CardData.Name[0]}</Avatar>
                     <p style={{ marginLeft: '10px' }}>{CardData.Name}<br /><span style={{ color: 'rgba(255, 190, 91, 1)' }}>Top Rated Seller</span></p>
                 </div>
-                <Link className='service-tittel'  onClick={ViewData} > {CardData.title} </Link>
+                <Link className='service-tittel' to='/Current-Saller' onClick={ViewData} > {CardData.title} </Link>
                 <div style={{ display: 'flex' }}>
                     <StarIcon style={{ color: 'rgba(255, 190, 91, 1)' }} />
                     <p style={{ marginTop: '2px', marginLeft: '5px', color: 'rgba(255, 190, 91, 1)' }}>{CardData.Rating}<span style={{ marginLeft: '5px', color: 'rgba(181, 182, 186, 1)' }}>({CardData.Orders})</span></p>

@@ -59,6 +59,35 @@
 
 
 
+/* css for the view gig page of the clint  */
+.Service-Page{
+    border: 1px solid red;
+    width: 800px;
+}
+.About-Service{
+    font-size: 20px;
+    font-weight: bold;
+} 
+
+.Package-card {
+    margin-left: 250px;
+    margin-top: 35px;
+    width: 50%;
+    height: 80%;
+    border: 1px solid rgba(116, 118, 126, 1);
+    padding: 10px;
+    background-color: rgba(250, 250, 250, 1);
+    border-radius: 5px;
+  }
+  
+
+
+
+
+
+
+
+
 /* Define CSS styles for different screen sizes using a similar object structure */
 /* Note: You can adjust the breakpoint values and styles as needed */
 
@@ -105,4 +134,23 @@
         margin-top: 10px;
         margin-right: -10%;
     }
+    .Service-Page{
+        border: 1px solid red;
+        width: 370px;
+    }
+    .Package-card {
+        margin-left: 90px;
+        margin-top: 35px;
+        width: 50%;
+        height: 80%;
+        border: 1px solid rgba(116, 118, 126, 1);
+        padding: 10px;
+        background-color: rgba(250, 250, 250, 1);
+        border-radius: 5px;
+      }
+      .image-service{
+        /* margin-right: 10px; */
+        margin-top: -50px;
+        margin-left: -20px;
+      }
 }

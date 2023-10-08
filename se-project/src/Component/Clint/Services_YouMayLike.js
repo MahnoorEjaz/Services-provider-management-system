@@ -21,6 +21,7 @@ const Top_Rated_slider = () => {
             Price: 50,
             Orders: 100,
             Name: 'WebDevPro123',
+            type: 'Web Development', // Added the type attribute with the value 'Web Development'
         },
         {
             url: [P1, P2, P3, P4],
@@ -29,6 +30,7 @@ const Top_Rated_slider = () => {
             Price: 40,
             Orders: 75,
             Name: 'DesignMaster',
+            type: 'Graphic Design', // Added the type attribute with the value 'Graphic Design'
         },
         {
             url: [P1, P2, P3, P4],
@@ -37,6 +39,7 @@ const Top_Rated_slider = () => {
             Price: 20,
             Orders: 50,
             Name: 'VAExpert',
+            type: 'Virtual Assistant', // Added the type attribute with the value 'Virtual Assistant'
         },
         {
             url: [P1, P2, P3, P4],
@@ -45,6 +48,7 @@ const Top_Rated_slider = () => {
             Price: 35,
             Orders: 90,
             Name: 'CopyWordsmith',
+            type: 'Copywriting', // Added the type attribute with the value 'Copywriting'
         },
         {
             url: [P1, P2, P3, P4],
@@ -53,6 +57,7 @@ const Top_Rated_slider = () => {
             Price: 45,
             Orders: 60,
             Name: 'VideoWizard',
+            type: 'Video Editing', // Added the type attribute with the value 'Video Editing'
         },
         {
             url: [P1, P2, P3, P4],
@@ -61,6 +66,7 @@ const Top_Rated_slider = () => {
             Price: 30,
             Orders: 80,
             Name: 'SocialMediaGuru',
+            type: 'Social Media', // Added the type attribute with the value 'Social Media'
         },
         {
             url: [P1, P2, P3, P4],
@@ -69,9 +75,9 @@ const Top_Rated_slider = () => {
             Price: 25,
             Orders: 40,
             Name: 'LangMaster',
+            type: 'Translation', // Added the type attribute with the value 'Translation'
         },
     ];
-
 
     return (
         <div style={{ marginRight: '50px', border: '1px solid rgba(34, 35, 37, 1) ', padding: '10px', marginBottom: '10px' }}>
