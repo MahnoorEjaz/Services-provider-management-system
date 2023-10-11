@@ -4,6 +4,7 @@ import Top_Rated_slider from './Top_Rated_slider';
 import MostpopularServices from './MostpopularServices';
 import Services_YoumayLike from './Services_YouMayLike';
 import FooterOtherThanMap from '../Footer/FooterOtherThanMap';
+// import AddNewService from '../Saller/AddNewService';
 
 const Clint_Complete = () => {
 
@@ -16,6 +17,7 @@ const Clint_Complete = () => {
                 <Top_Rated_slider />
                 <MostpopularServices />
                 <Services_YoumayLike />
+                {/* <AddNewService /> */}
             </div>
             <FooterOtherThanMap />
         </>
