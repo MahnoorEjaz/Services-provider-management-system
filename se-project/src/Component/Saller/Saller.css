@@ -1,0 +1,13 @@
+.Input-Field {
+    color: greenyellow;
+}
+.Lable {
+    margin-right: 3px;
+    min-width: 10%;
+    color: rgb(98, 100, 106);
+}
+
+.Input-Field{
+    display: flex;
+    margin: 20px;
+}

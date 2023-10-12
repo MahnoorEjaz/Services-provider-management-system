@@ -7,11 +7,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Feqs from './Component/Feq';
 // import FooterOtherThanMap from './Component/Footer/FooterOtherThanMap';
 // import LoginForm from './Component/Login/Login_';
-import Clint_Complete from './Component/Clint/Clint_Complete';
+import ClintComplete from './Component/Clint/Clint_Complete';
 import { useState, createContext } from 'react';
-import Header_Clint from './Component/Clint/Clint';
-import Gig_View from './Component/Clint/Gig_View';
-
+import HeaderClint from './Component/Clint/Clint';
+import GigView from './Component/Clint/Gig_View';
+import AddNewService from './Component/Saller/AddNewService';
 
 export const AppContext = createContext();
 
@@ -23,14 +23,7 @@ function App() {
     Price: 0,
     Orders: 0,
     Name: '',
-    type:''
-    // url: [P1, P2, P3, P4],
-    // title: 'Video Editing and Post-Production Services',
-    // Rating: 4.4,
-    // Price: 45,
-    // Orders: 60,
-    // Name: 'VideoWizard',
-
+    type: ''
   };
   const [Current_Service, Set_Current_Service] = useState(emptyData);
   const [isOpen, setIsOpen] = useState(false);
@@ -41,26 +34,29 @@ function App() {
     <>
       <AppContext.Provider value={{ Current_Service, Set_Current_Service }} >
         <Router>
-          <Header_Clint />
+          <HeaderClint />
           <Routes>
-            <Route path="/" element={<Clint_Complete />} />
-            <Route path="/Current-Saller" element={<Gig_View Current_Service={Current_Service} />} />
-            {/* <Route path='/View'  element= {'View gig '}/> */}
+            <Route path="/" element={<ClintComplete />} />
+            <Route path="/AddNewService" element={<AddNewService />} />
+            <Route path="/Current-Saller" element={<GigView Current_Service={Current_Service} />} />
           </Routes>
         </Router>
+      </AppContext.Provider>
 
-        {/* here is the code for the landing page  */}
-        {/* <Clint_Complete /> */}
-        {/* The content for the home page */}
-        {/* Uncomment these lines to include the components */}
-        {/* <Header />
+
+
+
+      {/* here is the code for the landing page  */}
+      {/* <Clint_Complete /> */}
+      {/* The content for the home page */}
+      {/* Uncomment these lines to include the components */}
+      {/* <Header />
         <ImageSlider />
         <AboutUs />
         <Contactus />
         <Feqs />
       <FooterOtherThanMap /> */}
 
-      </AppContext.Provider>
     </>
   );
 }
