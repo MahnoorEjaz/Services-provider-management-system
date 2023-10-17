@@ -19,3 +19,24 @@
     align-items: center;
     text-align: center;
 }
+
+.Gallary-Images {
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid rgb(98, 100, 106);
+}
+
+.Gallary-Images img {
+    width: 270px;
+    height: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    opacity: 0.5;
+    /* transition: 0.5s; */
+    border: 3px dotted   rgb(98, 100, 106);
+}
+.Gallary-Images img:hover {
+    opacity: 1;
+}
+
+

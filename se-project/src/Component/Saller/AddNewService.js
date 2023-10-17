@@ -3,11 +3,13 @@ import TextField from '@mui/material/TextField';
 import './Saller.css'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Discrestion from './Discrestion';
 import ReactLoading from "react-loading";
-import {DescriptionData} from './Discrestion.js'
+import { DescriptionData } from './Discrestion.js'
 import Gallary from './Gallary.js'
+import { Images_ } from './Gallary.js'
+
 
 
 const services = [
@@ -15,8 +17,10 @@ const services = [
     'Plumber',
     'Handyman',
     'Appliance Repair Technician',
-    'Carpenter', 'Landscaper/Gardener',
-    'Painter', 'HVAC Technician',
+    'Carpenter',
+    'Landscaper/Gardener',
+    'Painter',
+    'HVAC Technician',
     'Home Renovation Contractor',
     'Beautician',
     'Wellness Specialist',
@@ -29,7 +33,8 @@ const services = [
     'Legal Consultant',
     'Financial Advisor',
     'Transportation Service Provider',
-    'Teacher', 'Auto Mechanic',
+    'Teacher',
+    'Auto Mechanic',
 ];
 
 
@@ -43,7 +48,7 @@ const AddNewService = () => {
     const [showInput, setShowInput] = useState(true);
     const [showDiscrestion, setShowDiscrestion] = useState(false);
     const [Gallary_, setGallary] = useState(false);
-   
+
     const UpDateShow = () => {
         setShowDiscrestion(false);
         setGallary(true);
@@ -54,6 +59,8 @@ const AddNewService = () => {
         Tags: [],
         ServiceType: '',
         Description: DescriptionData,
+        Gallary: Images_, // i add the object of the gallary here 
+
 
 
     });
@@ -229,10 +236,10 @@ const AddNewService = () => {
                                         cursor: 'pointer',
                                         float: 'right',
                                         width: '150px',
-                                        height: '50px', 
-                                        padding: '10px 20px', 
+                                        height: '50px',
+                                        padding: '10px 20px',
                                         fontSize: '20px', // Adjust the font size as needed
-                                        
+
                                     }}
                                 />
                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -247,17 +254,17 @@ const AddNewService = () => {
             {
                 showDiscrestion &&
                 <div className='Main-Input-From'>
-                     <h2 style={{ color: 'rgba(98, 100, 106, 1)' }}>Write The Complte Explanation Of Your Project </h2>
-                    <Discrestion toggleDiscrestion={UpDateShow} />  
+                    <h2 style={{ color: 'rgba(98, 100, 106, 1)' }}>Write The Complte Explanation Of Your Project </h2>
+                    <Discrestion toggleDiscrestion={UpDateShow} />
                 </div>
-                
-            } 
+
+            }
             {
                 Gallary_ &&
                 <div className='Main-Input-From'>
                     <h2 style={{ color: 'rgba(98, 100, 106, 1)' }}>Add Some Pictures Of Your Project </h2>
                     <Gallary />
-                </div> 
+                </div>
             }
             <button onClick={PostData} > PostData</button>
         </div>
