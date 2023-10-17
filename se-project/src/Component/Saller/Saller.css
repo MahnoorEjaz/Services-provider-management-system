@@ -11,3 +11,11 @@
     display: flex;
     margin: 20px;
 }
+
+.Main-Input-From {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
