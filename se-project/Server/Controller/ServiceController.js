@@ -26,13 +26,19 @@ async function GetAllServices(req, res) {
 
 
 
-// Delete Api to Delete the Data from the Database
-async function DeleteService(Req, Res) {
+// Delete Api to Delete the Data from the Database 
+async function DeleteFirst15Services(req, res) {
     try {
-        const Data = await Service.findByIdAndDelete(Req.params.id);
-        Res.status(201).json(Data);
+        const userId = req.user.id;
+        const user = await MyUser.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const data = await Service.deleteOne({ createdBy: userId });  
+        console.log(data);  
+        res.status(200).json({message:'Deleted Successfully'});  
     } catch (error) {
-        Res.status(500).json({ error: error.mesage })
+        res.status(500).json({ message: error.message });
     }
 }
 // Update Api to Update the Data in the Database
@@ -93,7 +99,7 @@ async function PostProjetService(req, res) {
 // Export all the functions 
 module.exports = {
     GetAllServices,
-    DeleteService,
+    DeleteFirst15Services,
     UpdateService,
     PostProjetService,
 

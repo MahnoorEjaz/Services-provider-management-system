@@ -11,8 +11,9 @@ import Gallary from './Gallary.js'
 import { Images_ } from './Gallary.js'
 import { Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
-import { useNavigate } from 'react-router-dom';
 import ViewAllServices from './ViewAllServices.js'
+import { Grid } from '@mui/material';
+import Sellar_Card from '../Saller/Sellar_Cart';
 
 
 
@@ -59,7 +60,7 @@ const AddNewService = () => {
     const [ErrorContent, setErrorContent] = useState('');
     const [severity, setSeverity] = useState('Success');
     const [isOpen, setIsOpen] = React.useState(true);
-    const [Services, setServices] = useState([]);
+    const [ServicesData, setServices] = useState([]);
     const [GetData , SetGetData] = useState(false);
     const handleCloseSnackbar = () => {
         setMessageSent(false);
@@ -384,6 +385,19 @@ const AddNewService = () => {
             <button onClick={GetAllServices}>
                 get all services Data 
             </button>
+            {
+                GetData &&
+
+                ServicesData.map((card, index) => {
+                        return (
+                            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                                <Sellar_Card CardData={card} />
+                            </Grid>
+                        );
+                    } 
+                    )
+                
+            }
 
         </div>
 
