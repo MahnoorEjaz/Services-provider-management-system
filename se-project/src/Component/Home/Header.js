@@ -2,11 +2,11 @@ import { useState } from 'react';
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Logo from './Pic/logo.png';
+import Logo from '../Pic/logo.png';
 import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Submenu from './Submenu'
-import LoginForm from './Login/Login_';
+import LoginForm from '../Login/Login_';
 
 
 
@@ -79,7 +79,7 @@ function Header() {
                 </div>
                 <div>
                     {isSubmenu && <Submenu />}
-                    {isOpen && <LoginForm handleClose={togglePopup }  Whichshow={showtext}/>}
+                    {isOpen && <LoginForm handleClose={togglePopup }  Whichshow={showtext}/>} 
 
                 </div>
             </nav>

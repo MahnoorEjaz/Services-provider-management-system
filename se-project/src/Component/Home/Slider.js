@@ -1,9 +1,11 @@
 import React from "react";
 import SimpleImageSlider from "react-simple-image-slider";
-import P2 from './Pic/P3.jpg';
-import P1 from './Pic/P1.jpg';
-import P3  from './Pic/P1.jpg';
-import P4 from './Pic/P4.jpg'
+import P2 from '../Pic/P3.jpg';
+import P1 from '../Pic/P1.jpg';
+import P3  from '../Pic/P1.jpg';
+import P4 from '../Pic/P4.jpg';
+
+
 import useResizeObserver from "use-resize-observer";
 
 export default function App() {

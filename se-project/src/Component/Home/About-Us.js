@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import ContaintHome from './Containt_Home';
-import P1 from './Pic/34743913.jpg'
+import P1 from '../Pic/34743913.jpg'
 
 const AboutUs = () => {
     return (

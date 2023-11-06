@@ -9,6 +9,12 @@ import ReactLoading from "react-loading";
 import { DescriptionData } from './Discrestion.js'
 import Gallary from './Gallary.js'
 import { Images_ } from './Gallary.js'
+import { Snackbar } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
+import { useNavigate } from 'react-router-dom';
+import ViewAllServices from './ViewAllServices.js'
+
+
 
 
 
@@ -48,6 +54,17 @@ const AddNewService = () => {
     const [showInput, setShowInput] = useState(true);
     const [showDiscrestion, setShowDiscrestion] = useState(false);
     const [Gallary_, setGallary] = useState(false);
+    const [PostData_, setPostData] = useState(false);
+    const [isMessageSent, setMessageSent] = useState(false);
+    const [ErrorContent, setErrorContent] = useState('');
+    const [severity, setSeverity] = useState('Success');
+    const [isOpen, setIsOpen] = React.useState(true);
+    const [Services, setServices] = useState([]);
+    const [GetData , SetGetData] = useState(false);
+    const handleCloseSnackbar = () => {
+        setMessageSent(false);
+    }
+
 
     const UpDateShow = () => {
         setShowDiscrestion(false);
@@ -59,11 +76,14 @@ const AddNewService = () => {
         Tags: [],
         ServiceType: '',
         Description: DescriptionData,
-        Gallary: Images_, // i add the object of the gallary here 
+        Gallary: Images_, // i add the array  of the gallary here 
+    }); // i add the object of the gallary here   
+
+    const handlePostData = () => {
+        setPostData(true);
+    }
 
 
-
-    });
     const handleChangeInput = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -117,21 +137,90 @@ const AddNewService = () => {
                     setShowDiscrestion(true);
                 }, 1000);
 
+
             }
         }
     }
-    const PostData = () => {
+    function togglePopup(data) {
+        setIsOpen(!isOpen);
+    }
+    const PostData = async () => {
         setFormData({
             ...formData,
             Description: DescriptionData,
+            Gallary: Images_,
         });
-        console.log(formData);
+        const token = localStorage.getItem('token');
+        const apiUrl = 'http://localhost:5000/api/PostProjetService';
+        try {
+            setLoading(true);
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token, // Add the token to the Authorization header/bearer token
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) { // if HTTP-status is 200-299 
+                // add the 5 seconds delay and show the loading
+                setTimeout(async () => {
+                    setLoading(false);
+                    const data = await response.json();
+                    setErrorContent(data.message);
+                    setMessageSent(true);
+                    setSeverity('success');
+                }, 3000);
 
+            } else {
+                console.error('Error:', response.statusText);
+                const data = await response.json();
+                setErrorContent(data.message);
+                setMessageSent(true);
+                setSeverity('error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
+
+    const GetAllServices = async () => {
+        // To get all services from server side
+        const token = localStorage.getItem('token');
+        const apiUrl = 'http://localhost:5000/api/GetAllServices'; // Replace 'services' with your actual endpoint to retrieve services
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token, // Add the token to the Authorization header/bearer token
+                },
+            });
+            if (response.ok) { // if HTTP-status is 200-299 
+                const AllData = await response.json();
+                console.log(AllData);  // show the data in the console
+                setServices(AllData); // set the services in the state
+                SetGetData(true);
+                setLoading(false);
+            } else {
+                const AllData = await response.json();
+                setErrorContent(AllData.message);
+                setMessageSent(true);
+                setSeverity('error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    } 
 
 
     return (
         <div>
+            <Snackbar open={isMessageSent} autoHideDuration={4000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'center', horizontal: 'center' }} >
+                <MuiAlert elevation={6} variant="filled" severity={severity} onClose={handleCloseSnackbar}>
+                    {ErrorContent}
+                </MuiAlert>
+            </Snackbar>
             {
                 showInput &&
                 <div className='Main-Input-From'>
@@ -263,10 +352,39 @@ const AddNewService = () => {
                 Gallary_ &&
                 <div className='Main-Input-From'>
                     <h2 style={{ color: 'rgba(98, 100, 106, 1)' }}>Add Some Pictures Of Your Project </h2>
-                    <Gallary />
+                    <Gallary handlePostData={handlePostData} />
                 </div>
             }
-            <button onClick={PostData} > PostData</button>
+            {
+                PostData_ &&
+                <div style={{ textAlign: 'center' }}>
+                    <p style={{ color: 'rgba(98, 100, 106, 1)' }}>
+                        Your service is almost ready to publish. Please review your service details and publish your service.
+                    </p>
+                    <button onClick={PostData} style={{
+                        margin: '10px',
+                        marginTop: '10px',
+                        backgroundColor: 'rgba(29, 191, 115, 1)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                        alignItems: 'center',
+                        width: '150px',
+                        height: '50px',
+                        fontSize: '20px', // Adjust the font size as needed
+                    }} > Publish Now</button>
+
+                </div>
+            }
+            {
+                isOpen &&
+                <ViewAllServices handleClose={togglePopup} />
+            }
+            <button onClick={GetAllServices}>
+                get all services Data 
+            </button>
+
         </div>
 
 

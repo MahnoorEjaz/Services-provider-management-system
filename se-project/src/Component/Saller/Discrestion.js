@@ -62,7 +62,7 @@ const App = ({ toggleDiscrestion }) => {
         <MuiAlert elevation={6} variant="filled" severity="error" onClose={handleCloseSnackbar}>
           {ErrorContent}
         </MuiAlert>
-      </Snackbar> 
+      </Snackbar>  
       <div style={{ marginLeft: '500px' }}>
         <input
           type='submit'

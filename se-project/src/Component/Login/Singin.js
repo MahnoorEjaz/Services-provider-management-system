@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EmailIcon from '@mui/icons-material/Email';
@@ -8,13 +7,34 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaLinkedin } from 'react-icons/fa';
+import { AppContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Loading from "react-loading";
+
+
 
 
 const SignIn = () => {
+    const { HomeHeader, SetHomeHeader } = React.useContext(AppContext);
+
+    const navigate = useNavigate();
+    const ValidUser = () => {
+        SetHomeHeader(true);
+    }
     const [formData, setFormData] = useState({
         Email: '',
         Password: '',
     });
+    const [isMessageSent, setMessageSent] = useState(false);
+    const [ErrorContent, setErrorContent] = useState('');
+    const [severity, setSeverity] = useState('Success');
+    const [isLoading, setLoading] = useState(false);
+    const handleCloseSnackbar = () => {
+        setMessageSent(false);
+    }
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -22,20 +42,59 @@ const SignIn = () => {
             [name]: value,
         });
     };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setFormData({
-            Email: '',
-            Password: '',
-        })
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // Prevents default refresh by the browser
+        const apiUrl = 'http://localhost:5000/api/login';
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) { // if HTTP-status is 200-299
+                // add the 5 seconds delay and show the loading
+                const data = await response.json();
+                localStorage.setItem('token', data.token);
+                setLoading(true);
+                setTimeout(async () => {
+                    setLoading(false);
+                    setErrorContent(data.message);
+                    setMessageSent(true);
+                    setSeverity('success');
+                    ValidUser();
+                    navigate('/ClientHome');
+                    setFormData({
+                        Email: '',
+                        Password: '',
+                    });
+                }, 2000);
+
+            } else {
+                console.error('Error:', response.statusText);
+                setErrorContent('Invalid Credentials');
+                setMessageSent(true);
+                setSeverity('error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+
+
 
     };
 
     return (
         <div>
+            <Snackbar open={isMessageSent} autoHideDuration={4000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'center', horizontal: 'center' }} >
+                <MuiAlert elevation={6} variant="filled" severity={severity} onClose={handleCloseSnackbar}>
+                    {ErrorContent}
+                </MuiAlert>
+            </Snackbar>
             <form>
                 <TextField
-                    //  name="firstName" value={formData.firstName} onChange={handleChange}
                     name='Email'
                     value={formData.Email}
                     onChange={handleChange}
@@ -75,7 +134,18 @@ const SignIn = () => {
                 <Button variant="text" color="primary" sx={{ marginLeft: '200px' }}>
                     Forgot Password?
                 </Button>
-                <Button type="submit" onClick={handleSubmit} variant="contained" color="primary" fullWidth style={{ marginTop: '15px' }}>Login</Button>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    style={{ marginTop: '15px' }}
+                    onClick={handleSubmit}
+                >
+                    Login
+                </Button>
+
+
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <div style={{ flex: 1, height: '1px', backgroundColor: 'green' }} /><div>
                         <p style={{ width: '70px', textAlign: 'center' }}>OR</p>
@@ -111,6 +181,12 @@ const SignIn = () => {
                     <a href='#' style={{ textAlign: 'center', color: 'green' }}> <p>Create New Account</p></a>
                 </div>
             </form>
+            <div style={{textAlign:'center',maxWidth:'40px',marginLeft:'220px',marginTop:'-10px'}}>
+                {
+                    isLoading && <Loading type="spin" color="rgba(29, 191, 115, 1)" height={40} width={40} />
+                }
+            </div>
+
 
         </div>
     );

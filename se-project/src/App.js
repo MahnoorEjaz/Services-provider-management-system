@@ -1,18 +1,12 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Header from './Component/Header';
-// import ImageSlider from './Component/Slider';
-// import AboutUs from './Component/About-Us';
-// import Contactus from './Component/Contactus';
-// import Feqs from './Component/Feq';
-// import FooterOtherThanMap from './Component/Footer/FooterOtherThanMap';
-// import LoginForm from './Component/Login/Login_';
 import ClintComplete from './Component/Clint/Clint_Complete';
 import { useState, createContext } from 'react';
 import HeaderClint from './Component/Clint/Clint';
 import GigView from './Component/Clint/Gig_View';
 import AddNewService from './Component/Saller/AddNewService';
-
+import CompleteLanding from './Component/Home/CompleteLanding';
+import SignIn from './Component/Login/Singin';
 export const AppContext = createContext();
 
 function App() {
@@ -26,37 +20,23 @@ function App() {
     type: ''
   };
   const [Current_Service, Set_Current_Service] = useState(emptyData);
-  const [isOpen, setIsOpen] = useState(false);
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  }
+  const [HomeHeader, SetHomeHeader] = useState(false);
+  const [UserToken , SetUserToken] = useState('');
   return (
-    <>
-      <AppContext.Provider value={{ Current_Service, Set_Current_Service }} >
+    <> 
+      <AppContext.Provider value={{ Current_Service, Set_Current_Service ,HomeHeader, SetHomeHeader}} > 
         <Router>
-          <HeaderClint />
+          {
+            HomeHeader ?  <HeaderClint /> :<CompleteLanding />  
+          }
           <Routes>
-            <Route path="/" element={<ClintComplete />} />
-            <Route path="/AddNewService" element={<AddNewService />} />
+            {/* <Route path="/ClientHome" element={<ClintComplete />} /> */}
+            <Route path="/ClientHome" element={<AddNewService />} />
+            <Route path="/AddNewService" element={<AddNewService />} /> 
             <Route path="/Current-Saller" element={<GigView Current_Service={Current_Service} />} />
-          </Routes>
+          </Routes> 
         </Router>
       </AppContext.Provider>
-
-
-
-
-      {/* here is the code for the landing page  */}
-      {/* <Clint_Complete /> */}
-      {/* The content for the home page */}
-      {/* Uncomment these lines to include the components */}
-      {/* <Header />
-        <ImageSlider />
-        <AboutUs />
-        <Contactus />
-        <Feqs />
-      <FooterOtherThanMap /> */}
-
     </>
   );
 }

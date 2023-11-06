@@ -31,8 +31,8 @@ function  Popup({handleClose,Whichshow}){
         <h2 style={{ textAlign: 'center' }}>Please Login To Continue</h2> 
         <ToggleButtonGroup
           value={selected}
-          exclusive
-          onChange={handleAlignment}
+          exclusive      
+          onChange={handleAlignment} 
           sx={{ marginLeft: '70px' }} 
         >
           <ToggleButton selectedColor="#40a9ff" value="singin" style={{ marginRight: '10px', minWidth: '200px', textAlign: 'center', border: '2px solid #40a9ff', borderRadius: '5px', color: 'white', }}>

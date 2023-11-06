@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material'
 import React from 'react';
-import P1 from './Pic/contact us.jpg';
+import P1 from '../Pic/contact us.jpg';
 import Form from './Form'
 
 function Contactus() {

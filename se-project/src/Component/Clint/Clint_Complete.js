@@ -1,3 +1,5 @@
+import React from 'react';
+import HeaderClint from '../Clint/Clint';
 import HiClint from './Hi_clint';
 import ClintServices from './Clint_Services';
 import TopRatedSlider from './Top_Rated_slider';
@@ -11,7 +13,7 @@ const Clint_Complete = () => {
     return (
         <>
             <div className='Hi-clint'>
-                <HiClint /> 
+                <HiClint />
                 <ClintServices />
                 <TopRatedSlider />
                 <MostPopularServices />

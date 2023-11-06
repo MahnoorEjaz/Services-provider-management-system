@@ -9,12 +9,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import { AppContext } from '../../App';
 
+
 export default function BasicCard({ CardData }) {
 
     const {Current_Service, Set_Current_Service}= React.useContext(AppContext);
     const ViewData = () => { 
         Set_Current_Service(CardData);
-    } 
+    }  
 
 
     
