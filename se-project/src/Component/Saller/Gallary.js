@@ -5,8 +5,8 @@ import "react-quill/dist/quill.snow.css";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-const Images_ = [];
-const Gallary = ({handlePostData}) => {
+var Images_ = [];
+const Gallary = ({handlePostData,data}) => {
   const [image1, setImage] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
@@ -26,10 +26,10 @@ const Gallary = ({handlePostData}) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = () => {
         setBinaryDataImage1(reader.result);
       };
-      reader.readAsDataURL(file);
       const newImages = URL.createObjectURL(file);
       setImage(newImages);
     }
@@ -41,10 +41,10 @@ const Gallary = ({handlePostData}) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = () => {
         setBinaryDataImage2(reader.result);
       };
-      reader.readAsDataURL(file);
       const newImages = URL.createObjectURL(file);
       setImage2(newImages);
     }
@@ -56,10 +56,10 @@ const Gallary = ({handlePostData}) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = () => {
         setBinaryDataImage3(reader.result);
       };
-      reader.readAsDataURL(file);
       const newImages = URL.createObjectURL(file);
       setImage3(newImages);
     }
@@ -74,14 +74,12 @@ const Gallary = ({handlePostData}) => {
       setMessageSent(true);
       setSeverity('success');
       setErrorContent('Images are saved');
+      Images_ = [];
       Images_.push(BinaryDataImage1);
       Images_.push(BinaryDataImage2);
       Images_.push(BinaryDataImage3);
-      
-      // Images_.image1 = BinaryDataImage1;
-      // Images_.image2 = BinaryDataImage2;
-      // Images_.image3 = BinaryDataImage3;
       console.log(Images_);
+      data(Images_);
       handlePostData();
     }
 

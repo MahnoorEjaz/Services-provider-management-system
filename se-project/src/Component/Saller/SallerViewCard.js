@@ -1,71 +1,77 @@
 import * as React from 'react';
 import CardContent from '@mui/joy/CardContent';
-import SimpleImageSlider from 'react-simple-image-slider'
-import Avatar from '@mui/material/Avatar';
-import StarIcon from '@mui/icons-material/Star';
-import { CardMedia, Divider } from '@mui/material';
-import { FaHeart } from 'react-icons/fa';
-import { useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import { AppContext } from '../../App';
-
+import { CardMedia, Divider, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Link } from 'react-router-dom';
 
 export default function BasicCard({ CardData }) {
-
-    const {Current_Service, Set_Current_Service}= React.useContext(AppContext);
-    const ViewData = () => { 
-        Set_Current_Service(CardData);
-    }  
-
-
-    
-    const [showNavs_, setnav] = React.useState(false)
-    const [liked, setLiked] = useState(false);
-    const handleMouseEnter = () => {
-        setnav(true);
-    }
-    const handleMouseLeave = () => {
-        setnav(false);
-    } 
-    const toggleLike = () => {
-        setLiked(!liked);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [openDialog, setOpenDialog] = React.useState(false);
+    const handleMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
     };
-    const iconColor = liked ? 'rgba(255, 190, 91, 1)' : 'rgba(116, 118, 126, 1)';
-    const iconStyle = {
-        fontSize: '20px',
-        marginTop: '20px',
-        color: iconColor,
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+    const handleEdit = () => {
+        handleMenuClose();
+    };
+    const handleDelete = () => {
+        // Open the delete confirmation dialog
+        setOpenDialog(true);
+        handleMenuClose();
+    };
+    const handleCloseDialog = () => {
+        // Close the delete confirmation dialog
+
+        setOpenDialog(false);
+    };
+    const handleConfirmDelete = () => {
+        // Implement delete logic here
+        const token = localStorage.getItem('token');
+        const apiUrl = 'http://localhost:5000/api/DeleteService'; // Replace 'services' with your actual endpoint to retrieve services
+        const Id = CardData._id;
+        const response = fetch(apiUrl, {
+            
+        });
+
+        // Close the dialog after deletion
+        setOpenDialog(false);
     };
     return (
-
-        <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', margin: '5px' }}>
-            <CardMedia >
-                <div onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}>
-                    <SimpleImageSlider width={300} height={200} images={CardData.url} showBullets={true} showNavs={showNavs_} />
-                </div> 
-            </CardMedia> 
+        <div className='Saller-Card' style={{ maxWidth: '300px', height: '300px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', margin: '5px', position: 'relative' }}>
+            <CardMedia>
+                <div>
+                    <img width={300} height={200} src={CardData.Gallary[0].data} alt="CardImage" />
+                </div>
+            </CardMedia>
             <CardContent sx={{ border: '1px solid rgba(34, 35, 37, 1)', borderTop: '1px solid white', height: '150%' }}>
-                <div style={{ display: 'flex' }}>
-                    <Avatar sx={{ bgcolor: 'rgba(29, 191, 115, 1)', marginTop: '10px' }}>{CardData.Name[0]}</Avatar>
-                    <p style={{ marginLeft: '10px' }}>{CardData.Name}<br /><span style={{ color: 'rgba(255, 190, 91, 1)' }}>Top Rated Seller</span></p>
-                </div>
-                <Link className='service-tittel' to='/Current-Saller' onClick={ViewData} > {CardData.title} </Link>
-                <div style={{ display: 'flex' }}>
-                    <StarIcon style={{ color: 'rgba(255, 190, 91, 1)' }} />
-                    <p style={{ marginTop: '2px', marginLeft: '5px', color: 'rgba(255, 190, 91, 1)' }}>{CardData.Rating}<span style={{ marginLeft: '5px', color: 'rgba(181, 182, 186, 1)' }}>({CardData.Orders})</span></p>
-                </div>
+                <Link className='service-tittel' style={{ marginTop: '10px' }}>
+                    {CardData.ServiceTitle}
+                </Link>
                 <Divider />
                 <div style={{ display: 'flex', justifyContent: 'space-between', maxHeight: '150%' }}>
-                    <FaHeart style={iconStyle} onClick={toggleLike} />
-                    <div>
-                        <p style={{ color: 'rgba(116, 118, 126, 1)' }}>
-                            Started At <br />
-                            ${CardData.Price}
-                        </p>
-                    </div>
+                    <p style={{ color: 'rgba(116, 118, 126, 1)' }}>Started At</p>
+                    <p>{CardData.BasicPrice}$</p>
                 </div>
             </CardContent>
+            <div style={{ position: 'absolute', top: 0, right: 0, padding: '8px', cursor: 'pointer' }}>
+                <MoreVertIcon onClick={handleMenuClick} style={{ fontSize: 30 }} />
+                <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                    <MenuItem onClick={handleEdit}>Edit</MenuItem>
+                    <MenuItem onClick={handleDelete}>Delete</MenuItem>
+                </Menu>
+            </div>
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>Delete Confirmation</DialogTitle>
+                <DialogContent>
+                    Are you sure you want to delete the service?
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog}>Cancel</Button>
+                    <Button onClick={handleConfirmDelete} variant="contained" color="error">Delete</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

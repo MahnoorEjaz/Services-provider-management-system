@@ -21,7 +21,7 @@ const modules = {
 let DescriptionData = '';
 
 
-const App = ({ toggleDiscrestion }) => {
+const App = ({ toggleDiscrestion ,data}) => {
   const [value, setValue] = useState("");
   const [isMessageSent, setMessageSent] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -48,6 +48,7 @@ const App = ({ toggleDiscrestion }) => {
         setMessageSent(false);
         console.log(DescriptionData);
         DescriptionData = value;
+        data(DescriptionData);
         setTimeout(() => {
           setLoading(false);
           toggleDiscrestion();

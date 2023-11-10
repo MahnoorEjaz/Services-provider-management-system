@@ -12,7 +12,7 @@ Routes.put("/UpDateUser/:id", UpdateUser);
 Routes.post('/PostProjetUser', PostProjetUser);
 Routes.post('/login', login);
 Routes.post('/PostProjetService', AuthenticationMiddleware, PostProjetService);
-Routes.get('/DeleteService', DeleteFirst15Services);
+Routes.get('/DeleteService',DeleteFirst15Services);
 Routes.get('/GetAllServices', AuthenticationMiddleware,GetAllServices);
 
 module.exports = Routes;   // export the routes

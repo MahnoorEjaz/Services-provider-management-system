@@ -6,7 +6,7 @@ import HeaderClint from './Component/Clint/Clint';
 import GigView from './Component/Clint/Gig_View';
 import AddNewService from './Component/Saller/AddNewService';
 import CompleteLanding from './Component/Home/CompleteLanding';
-import SignIn from './Component/Login/Singin';
+import { ViewProfile } from './Component/Saller/ViewProfile';
 export const AppContext = createContext();
 
 function App() {
@@ -27,11 +27,13 @@ function App() {
       <AppContext.Provider value={{ Current_Service, Set_Current_Service ,HomeHeader, SetHomeHeader}} > 
         <Router>
           {
-            HomeHeader ?  <HeaderClint /> :<CompleteLanding />  
+            HomeHeader ?  <HeaderClint /> : <HeaderClint /> 
           }
           <Routes>
+            <Route path="/login" element={<CompleteLanding />} />
             {/* <Route path="/ClientHome" element={<ClintComplete />} /> */}
-            <Route path="/ClientHome" element={<AddNewService />} />
+            <Route path="/AddNewService" element={<AddNewService />} /> 
+            <Route path="/ViewProfile" element={<ViewProfile />} />
             <Route path="/AddNewService" element={<AddNewService />} /> 
             <Route path="/Current-Saller" element={<GigView Current_Service={Current_Service} />} />
           </Routes> 

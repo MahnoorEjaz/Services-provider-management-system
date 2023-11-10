@@ -12,8 +12,10 @@ import { Images_ } from './Gallary.js'
 import { Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import ViewAllServices from './ViewAllServices.js'
-import { Grid } from '@mui/material';
-import Sellar_Card from '../Saller/Sellar_Cart';
+
+
+
+
 
 
 
@@ -59,13 +61,22 @@ const AddNewService = () => {
     const [isMessageSent, setMessageSent] = useState(false);
     const [ErrorContent, setErrorContent] = useState('');
     const [severity, setSeverity] = useState('Success');
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
     const [ServicesData, setServices] = useState([]);
-    const [GetData , SetGetData] = useState(false);
+    const [GetData, SetGetData] = useState(false);
+    const [Images, setImages] = useState([]);
+    const [DiscrestionData, setDiscrestionData] = useState('');
     const handleCloseSnackbar = () => {
         setMessageSent(false);
     }
+    const handleDiscrestionData = (data) => {
 
+        setDiscrestionData(data);
+    }
+    const handleImages = (data) => {
+        console.log('this is the data of the images');
+        setImages(data);
+    }
 
     const UpDateShow = () => {
         setShowDiscrestion(false);
@@ -76,12 +87,13 @@ const AddNewService = () => {
         BasicPrice: '',
         Tags: [],
         ServiceType: '',
-        Description: DescriptionData,
-        Gallary: Images_, // i add the array  of the gallary here 
+        Description: DiscrestionData,
+        Gallary: Images, // i add the array  of the gallary here 
     }); // i add the object of the gallary here   
 
     const handlePostData = () => {
         setPostData(true);
+
     }
 
 
@@ -143,14 +155,26 @@ const AddNewService = () => {
         }
     }
     function togglePopup(data) {
-        setIsOpen(!isOpen);
+        setIsOpen(true);
     }
     const PostData = async () => {
         setFormData({
             ...formData,
-            Description: DescriptionData,
-            Gallary: Images_,
+            Description: DiscrestionData,
+            Gallary: Images,
         });
+        if (formData.Gallary.length === 0 || formData.Description.length === 0) {
+            setFormData({
+                ...formData,
+                Description: DiscrestionData,
+                Gallary: Images,
+            });
+            setErrorContent('Are You Sure You Want To Publish Then Press Publish Now Button Again');
+            setMessageSent(true);
+            setSeverity('error');
+            return;
+        }
+        console.log(formData);
         const token = localStorage.getItem('token');
         const apiUrl = 'http://localhost:5000/api/PostProjetService';
         try {
@@ -165,6 +189,7 @@ const AddNewService = () => {
             });
             if (response.ok) { // if HTTP-status is 200-299 
                 // add the 5 seconds delay and show the loading
+                setIsOpen(true);
                 setTimeout(async () => {
                     setLoading(false);
                     const data = await response.json();
@@ -185,41 +210,14 @@ const AddNewService = () => {
         }
     }
 
-    const GetAllServices = async () => {
-        // To get all services from server side
-        const token = localStorage.getItem('token');
-        const apiUrl = 'http://localhost:5000/api/GetAllServices'; // Replace 'services' with your actual endpoint to retrieve services
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'GET',
-                headers:{
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token, // Add the token to the Authorization header/bearer token
-                },
-            });
-            if (response.ok) { // if HTTP-status is 200-299 
-                const AllData = await response.json();
-                console.log(AllData);  // show the data in the console
-                setServices(AllData); // set the services in the state
-                SetGetData(true);
-                setLoading(false);
-            } else {
-                const AllData = await response.json();
-                setErrorContent(AllData.message);
-                setMessageSent(true);
-                setSeverity('error');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    } 
+    
 
 
     return (
         <div>
             <Snackbar open={isMessageSent} autoHideDuration={4000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'center', horizontal: 'center' }} >
                 <MuiAlert elevation={6} variant="filled" severity={severity} onClose={handleCloseSnackbar}>
-                    {ErrorContent}
+                    {ErrorContent} 
                 </MuiAlert>
             </Snackbar>
             {
@@ -333,7 +331,7 @@ const AddNewService = () => {
                                     }}
                                 />
                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                    {loading && <ReactLoading type="spin" color="rgba(29, 191, 115, 1)" height={50} width={50}
+                                    {loading && <ReactLoading type="bars" color="rgba(29, 191, 115, 1)" height={50} width={50}
                                     />}
                                 </div>
                             </form >
@@ -345,7 +343,7 @@ const AddNewService = () => {
                 showDiscrestion &&
                 <div className='Main-Input-From'>
                     <h2 style={{ color: 'rgba(98, 100, 106, 1)' }}>Write The Complte Explanation Of Your Project </h2>
-                    <Discrestion toggleDiscrestion={UpDateShow} />
+                    <Discrestion toggleDiscrestion={UpDateShow} data={handleDiscrestionData} />
                 </div>
 
             }
@@ -353,7 +351,7 @@ const AddNewService = () => {
                 Gallary_ &&
                 <div className='Main-Input-From'>
                     <h2 style={{ color: 'rgba(98, 100, 106, 1)' }}>Add Some Pictures Of Your Project </h2>
-                    <Gallary handlePostData={handlePostData} />
+                    <Gallary handlePostData={handlePostData} data={handleImages} />
                 </div>
             }
             {
@@ -382,23 +380,7 @@ const AddNewService = () => {
                 isOpen &&
                 <ViewAllServices handleClose={togglePopup} />
             }
-            <button onClick={GetAllServices}>
-                get all services Data 
-            </button>
-            {
-                GetData &&
-
-                ServicesData.map((card, index) => {
-                        return (
-                            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-                                <Sellar_Card CardData={card} />
-                            </Grid>
-                        );
-                    } 
-                    )
-                
-            }
-
+           
         </div>
 
 

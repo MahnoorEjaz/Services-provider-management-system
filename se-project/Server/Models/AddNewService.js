@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
-const imageSchema = new mongoose.Schema({
+const imageSchema1 = new mongoose.Schema({
     data: {
-        type: Buffer, // Store image data as binary
-    },
-    contentType: {
-        type: String, // MIME type of the image (e.g., 'image/jpeg')
-    },
+        type: String, // Store image data as binary
+        required: true,
+    }
 });
 const serviceSchema = new mongoose.Schema({
     ServiceTitle: {
@@ -18,9 +16,9 @@ const serviceSchema = new mongoose.Schema({
         required: true,
     },
     Tags: [String], // Array of strings
-    ServiceType: String,
+    ServiceType: String, 
     Description: String,
-    Gallary: [imageSchema], // Array of images using the 'imageSchema'
+    Gallary: [imageSchema1], // Array of images using the 'imageSchema'
     createdBy: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', // Reference to the User model
