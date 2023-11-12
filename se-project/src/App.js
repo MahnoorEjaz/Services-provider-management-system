@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ClintComplete from './Component/Clint/Clint_Complete';
 import { useState, createContext } from 'react';
 import HeaderClint from './Component/Clint/Clint';
@@ -21,22 +23,23 @@ function App() {
   };
   const [Current_Service, Set_Current_Service] = useState(emptyData);
   const [HomeHeader, SetHomeHeader] = useState(false);
-  const [UserToken , SetUserToken] = useState('');
+  const [UserToken, SetUserToken] = useState('');
   return (
-    <> 
-      <AppContext.Provider value={{ Current_Service, Set_Current_Service ,HomeHeader, SetHomeHeader}} > 
+    <>
+      <AppContext.Provider value={{ Current_Service, Set_Current_Service, HomeHeader, SetHomeHeader }} >
+        <ToastContainer />
         <Router>
           {
-            HomeHeader ?  <HeaderClint /> : <HeaderClint /> 
+            HomeHeader ? <HeaderClint /> : <HeaderClint />
           }
           <Routes>
             <Route path="/login" element={<CompleteLanding />} />
-            {/* <Route path="/ClientHome" element={<ClintComplete />} /> */}
-            <Route path="/AddNewService" element={<AddNewService />} /> 
+            <Route path="/ClientHome" element={<ClintComplete />} />
+            <Route path="/AddNewService" element={<AddNewService />} />
             <Route path="/ViewProfile" element={<ViewProfile />} />
-            <Route path="/AddNewService" element={<AddNewService />} /> 
+            <Route path="/AddNewService" element={<AddNewService />} />
             <Route path="/Current-Saller" element={<GigView Current_Service={Current_Service} />} />
-          </Routes> 
+          </Routes>
         </Router>
       </AppContext.Provider>
     </>

@@ -1,67 +1,189 @@
 import React from 'react';
 import P1 from '../Pic/P1.jpg';
-import { Divider, Grid } from '@mui/material';
+import { Divider } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
+import { useState, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ProfileLeftside = () => {
+    const TotalServices = 100;
+    const Inboxresponse = 100;
+    const Orderresponse = 100;
+    const Delivered = 100;
+    const Ordercompletion = 10;
+    const [image1, setImage] = useState(null);
+    const [BinaryDataImage, setBinaryDataImage] = useState(null);
+    const inputfile1 = React.useRef(null);
+    const [userName , setUserName] = useState('Saller Name');
+
+    const changeImageDiv = () => {
+        inputfile1.current.click();
+    }
+    useEffect(() => {
+        const GetUserData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const apiUrl = `http://localhost:5000/api/GetUser`;
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                });
+                const data = await response.json();
+                console.log(data);  
+                if (response.ok) {
+                    setUserName(data.Data.Name);
+                    setImage(data.Data.ProfileImage);
+                } else {
+                    console.log('Error');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        GetUserData();
+    }, [BinaryDataImage]);
+    const handleImageInput = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                AddDataInDatabase(reader.result);
+            };
+            const newImages = URL.createObjectURL(file);
+            setImage(newImages);
+        }
+        else {
+            toast.error('Please Select Image');
+        }
+    }
+
+
+    const AddDataInDatabase = async (BinaryDataImage) => {
+        try {
+            const token = localStorage.getItem('token');
+            const apiUrl = `http://localhost:5000/api/UPDataUser`;
+            const response = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                },
+                body: JSON.stringify({ ProfileImage: BinaryDataImage })
+            });
+            const data = await response.json();
+            console.log(data);
+            if (response.ok) {
+                console.log(data);
+                toast.success('Profile Image Updated Successfully',
+                    {
+                        position: "top-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                setBinaryDataImage(BinaryDataImage);
+            } else {
+                console.log('Error');
+            } 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+
+
     return (
         <>
-            <div
-            className='profile-leftside-main-div'
-                >
-                <img
-                    style={{
-                        maxWidth: '100px',
-                        borderRadius: '50%',
-                        margin: '10px auto 0', // Adjust margin to control vertical spacing
-                        height: '100px',
-                    }}
-                    src={P1} alt="" /* Saller Profile Pic */
-                />
-                <h5 style={{color:'rgba(116, 118, 126, 1)'}} >Saller Name</h5>
-                <div style={{ display: 'flex', justifyContent: 'space-between',color:'rgba(116, 118, 126, 1)', }}> 
+            <div className='profile-leftside-main-div'>
+
+                <div className='Profile-pic' onClick={changeImageDiv} >
+                    <img src={image1} alt='Loading...' className='Profile-pic' />  {/* src={UserImage} */}
+                    <input type="file" name="Pic1" ref={inputfile1} accept="image/*" onChange={handleImageInput} style={{ display: 'none' }} required />
+                </div>
+
+                <h5 style={{ color: 'rgba(116, 118, 126, 1)' }} >{userName}</h5>
+                <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(116, 118, 126, 1)', }}>
                     <p>
-                       Total Services
+                        Total Services
                     </p>
+                    <LinearProgress
+                        variant="determinate"
+                        value={TotalServices}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px', marginLeft: '50px' }}
+                        color='success'
+                    />
                     <p>
-                        N/A
+                        <span>{TotalServices}%</span>
                     </p>
                 </div>
                 <div className='ViewProfile-contant'>
                     <p>
-                        Saller Description
+                        Inbox response rate
                     </p>
+                    <LinearProgress
+                        variant="determinate"
+                        value={Inboxresponse}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px' }}
+                        color='success'
+                    />
                     <p>
-                        value
-                    </p>
-                </div>
-                <div className='ViewProfile-contant'>
-                    <p>
-                        Saller Description
-                    </p>
-                    <p>
-                        value
+                        <span>{Inboxresponse}%</span>
                     </p>
                 </div>
                 <div className='ViewProfile-contant'>
                     <p>
-                        Saller Description
+                        Order response rate
                     </p>
+                    <LinearProgress
+                        variant="determinate"
+                        value={Orderresponse}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px' }}
+                        color='success'
+                    />
                     <p>
-                        value
+                        <span>{Orderresponse}%</span>
                     </p>
                 </div>
                 <div className='ViewProfile-contant'>
                     <p>
-                        Saller Description
+                        Delivered on time
                     </p>
+                    <LinearProgress
+                        variant="determinate"
+                        value={Delivered}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px', marginLeft: '10px' }}
+                        color='success'
+                    />
                     <p>
-                        value
+                        <span>{Delivered}%</span>
+                    </p>
+                </div>
+                <div className='ViewProfile-contant'>
+                    <p>Order completion</p>
+                    <LinearProgress
+                        variant="determinate"
+                        value={Ordercompletion}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px', marginLeft: '10px' }}
+                        color='success'
+                    />
+                    <p>
+                        <span>{Ordercompletion}%</span>
                     </p>
                 </div>
                 <Divider></Divider>
-                <div style={{ display: 'flex', justifyContent: 'space-between' ,color:'rgba(116, 118, 126, 1)'}}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(116, 118, 126, 1)' }}>
                     <p>
-                       Total Earning
+                        Total Earning
                     </p>
                     <p>
                         $ 0.00

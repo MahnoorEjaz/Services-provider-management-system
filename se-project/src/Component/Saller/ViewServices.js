@@ -3,7 +3,6 @@ import React from 'react';
 import SallerViewCard from './SallerViewCard';
 import { useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
-import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 

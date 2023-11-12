@@ -16,12 +16,23 @@ const serviceSchema = new mongoose.Schema({
         required: true,
     },
     Tags: [String], // Array of strings
-    ServiceType: String, 
+    ServiceType: String,
     Description: String,
     Gallary: [imageSchema1], // Array of images using the 'imageSchema'
     createdBy: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User', // Reference to the User model
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+    },
+    isActive: {
+        type: Boolean,
+        default: true,
     },
 });
 module.exports = mongoose.model('Service', serviceSchema);

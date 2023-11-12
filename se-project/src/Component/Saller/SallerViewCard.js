@@ -37,29 +37,35 @@ export default function BasicCard({ CardData }) {
         setOpenDialog(false);
     };
     const handleConfirmDelete = async () => {
-        
         try {
             const id = CardData._id;
+            console.log(id);
             const token = localStorage.getItem('token');
             const apiUrl = `http://localhost:5000/api/DeleteService/${id}`;
             const response = await fetch(apiUrl, {
-                method: 'DELETE',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                 },
             });
-
             if (response.ok) {
                 console.log('Service deleted successfully');
-                alert('Deleted Successfully');
+                setSeverity('success');
+                setErrorContent('Service deleted successfully');
+                setMessageSent(true);
+                window.location.reload();
             } else {
-                console.error('Failed to delete service');
-                alert('Failed to delete service');
+                setSeverity('error');
+                const error = await response.json();
+                setErrorContent(error.message);
+                setMessageSent(true);
             }
         } catch (error) {
-            console.error('An error occurred during the delete request:', error);
-            alert('Failed to delete service', error.message);
+            // Failed to execute 'json' on 'Response': body stream already read
+            setSeverity('error');
+            setErrorContent(error.message);
+            setMessageSent(true);
         } finally {
             setOpenDialog(false);
         }
@@ -69,7 +75,7 @@ export default function BasicCard({ CardData }) {
 
     return (
         <>
-            <div className='Saller-Card' style={{ maxWidth: '300px', height: '300px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', margin: '5px', position: 'relative' }}>
+            <div className='Saller-Card' style={{ maxWidth: '300px', height: '300px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', position: 'relative' }}>
                 <CardMedia>
                     <div>
                         <img width={300} height={200} src={CardData.Gallary[0].data} alt="CardImage" />

@@ -13,7 +13,7 @@ async function GetAllServices(req, res) {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    const data = await Service.find({ createdBy: userId });
+    const data = await Service.find({ createdBy: userId, isActive: true });
     console.log(data.map((service) => service.Gallary.map((image) => image.data)));
     res.status(200).json(data);
   } catch (error) {
@@ -21,12 +21,6 @@ async function GetAllServices(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
-
-
-
-
-
-
 // Delete Api to Delete the Data from the Database 
 async function DeleteFirst15Services(req, res) {
   try {
@@ -36,18 +30,20 @@ async function DeleteFirst15Services(req, res) {
       return res.status(401).json({ message: 'User not authenticated' });
     }
     const serviceId = req.params.id;
-    const service = await Service.deleteOne({ createdBy: userId, _id: serviceId });
-    if (!service) {
-      console.log('Service not found');
+    const service = await Service.updateOne({ createdBy: userId, _id: serviceId }, { $set: { isActive: false } });
+    if (service.nModified === 0) {
       return res.status(404).json({ message: 'Service not found' });
     }
-    res.status(200).json({ message: 'Deleted Successfully', data: service });
+    res.status(200).json({ message: 'Deleted Successfully', data: service }); // Return the updated service
   } catch (error) {
     console.error('Error during service deletion:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
- 
+
+
+
+
 // Update Api to Update the Data in the Database
 async function UpdateService(Req, Res) {
   try {
@@ -57,8 +53,6 @@ async function UpdateService(Req, Res) {
     Res.status(500).json({ error: error.mesage })
   }
 }
-
-
 // Create a new service without images and with user reference
 async function PostProjetService(req, res) {
   try {
@@ -86,6 +80,9 @@ async function PostProjetService(req, res) {
       Description,
       Gallary: imageObjects, // Save an array of image objects in the Gallary field
       createdBy: user._id,
+      createdAt: Date.now(),
+      updatedAt: null,
+      isActive: true,
     });
     const result = await newService.save();
     res.status(201).json({ result, message: 'Service created successfully' });
@@ -94,13 +91,6 @@ async function PostProjetService(req, res) {
     res.status(500).json({ message: 'Error creating service', error });
   }
 }
-
-
-
-
-
-
-
 // Export all the functions 
 module.exports = {
   GetAllServices,
