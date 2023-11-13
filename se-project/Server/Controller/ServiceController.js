@@ -3,7 +3,7 @@ const Service = require('../Models/AddNewService');
 
 
 // making the get api
-async function GetAllServices(req, res) {
+async function GetAllServices1(req, res) {
   try {
     if (!req.user || !req.user.id) {
       return res.status(401).json({ message: 'User not authenticated' });
@@ -40,9 +40,18 @@ async function DeleteFirst15Services(req, res) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
-
-
-
+// Get all servives with the user reference name of the user 
+async function GellAllServicesforall(req, res) {
+  try {
+    // Use populate to get the creator information for each service
+    const services = await Service.find({isActive:true}).populate('createdBy', 'Name').exec(); // Specify the fields you want to retrieve from the User model
+    console.log(services);
+    return res.status(200).json(services);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 // Update Api to Update the Data in the Database
 async function UpdateService(Req, Res) {
@@ -93,10 +102,12 @@ async function PostProjetService(req, res) {
 }
 // Export all the functions 
 module.exports = {
-  GetAllServices,
+  GetAllServices1,
   DeleteFirst15Services,
   UpdateService,
+  GellAllServicesforall,
   PostProjetService,
+
 
 };
 

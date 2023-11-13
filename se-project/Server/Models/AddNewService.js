@@ -21,18 +21,22 @@ const serviceSchema = new mongoose.Schema({
     Gallary: [imageSchema1], // Array of images using the 'imageSchema'
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to the User model
+        ref: 'MyUser', // Reference to the User model
     },
     createdAt: {
         type: Date,
         default: Date.now,
     },
-    updatedAt: {
+    updatedAt: { // Update this field when the service is updated     
         type: Date,
     },
     isActive: {
         type: Boolean,
         default: true,
     },
+    NumberOfOrders:{
+        type:Number,
+        default:0,
+    }
 });
 module.exports = mongoose.model('Service', serviceSchema);

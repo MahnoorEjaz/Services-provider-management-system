@@ -34,11 +34,11 @@ function App() {
           }
           <Routes>
             <Route path="/login" element={<CompleteLanding />} />
-            <Route path="/ClientHome" element={<ClintComplete />} />
+            <Route path="/ViewAllServices" element={<ClintComplete />} />
             <Route path="/AddNewService" element={<AddNewService />} />
             <Route path="/ViewProfile" element={<ViewProfile />} />
             <Route path="/AddNewService" element={<AddNewService />} />
-            <Route path="/Current-Saller" element={<GigView Current_Service={Current_Service} />} />
+            <Route path="/Current-Saller" element={<GigView Current_Service={Current_Service} />} /> 
           </Routes>
         </Router>
       </AppContext.Provider>
