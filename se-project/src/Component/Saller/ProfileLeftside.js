@@ -1,9 +1,8 @@
 import React from 'react';
-import P1 from '../Pic/P1.jpg';
 import { Divider } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useState, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const ProfileLeftside = () => {

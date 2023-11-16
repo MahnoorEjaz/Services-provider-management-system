@@ -9,14 +9,17 @@ import ReviewComponent from './ReviewComponet';
 import { useEffect, useState } from 'react';
 import { AppContext } from '../../App';
 import * as React from 'react';
+import PlaceOrderShow from './PlaceOrder.js';
 
 
 
 const Gig_View = () => {
 
   const { Current_Service, Set_Current_Service } = React.useContext(AppContext);
-  // Create a state variable for 'one'
+  const [PlaceOrder, SetPlaceOrder] = useState(false);
+  const [PlaceOrderData, SetPlaceOrderData] = useState(false);
   const [one, setOne] = useState(Current_Service);
+  // Create a state variable for 'one'
   // Load the data from local storage when the component mounts
   useEffect(() => {
     const storedData = localStorage.getItem('Current_Service');
@@ -25,34 +28,36 @@ const Gig_View = () => {
       alert('Data is stored');
       // If data exists, parse and set it to the state variable
       setOne(JSON.parse(storedData));
-    } 
-    else{
+    }
+    else {
       alert('Data is not stored');
     }
-  }, []); 
-
-
+  }, []);
   //  image gallary is done 
   const images = one.Gallary.map((url) => ({
     original: url.data,
     thumbnail: url.data,
-    originalHeight: 500, // Set the desired height
-    originalWidth: 300, // Set the desired width
+    originalHeight: 500, // Set the desired height  
+    originalWidth: 300, // Set the desired width 
   }));
+  const ShowDilog = () => {
+    SetPlaceOrder(true);
+    SetPlaceOrderData(true);
 
+  }
 
-
-
-
-
-
-
-
+  const HideDilog = () => {
+    SetPlaceOrder(false);
+    SetPlaceOrderData(null);
+  }
 
 
   return (
+
     <>
+
       <div className='Hi-clint' >
+        {PlaceOrder && <PlaceOrderShow CheckShow={PlaceOrderData} func={HideDilog} Data={one} />} {/* This is the dialog box for place order */} 
         <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{one.ServiceTitle}</p>
         <div style={{ display: 'flex' }}>
           <Avatar sx={{ bgcolor: 'rgba(29, 191, 115, 1)', marginTop: '10px' }}>  {one.createdBy && one.createdBy.Name ? one.createdBy.Name[0] : ''}  </Avatar>
@@ -92,7 +97,10 @@ const Gig_View = () => {
                   {one.ServiceType}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
-                  <Button variant="contained" style={{ width: '100%', marginBottom: '200px', backgroundColor: 'rgba(29, 191, 115, 1)', textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>Continue<FaArrowRight />  </Button>
+                  <Button variant="contained" style={{ width: '100%', marginBottom: '200px', backgroundColor: 'rgba(29, 191, 115, 1)', textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}
+                    onClick={ShowDilog}  >
+                    Continue<FaArrowRight />
+                  </Button>
                   <Button variant="contained" style={{ width: '100%', backgroundColor: 'white', border: '1px solid gray', color: 'rgba(98, 100, 106, 1)', marginBottom: '50px' }}>Contact Seller</Button>
                 </div>
               </div>
@@ -103,7 +111,7 @@ const Gig_View = () => {
         <div className='Service-Page'>
           <div>
             <p className='About-Service'>About Service</p>
-            <div dangerouslySetInnerHTML={{ __html: one.Description }} />
+            <div dangerouslySetInnerHTML={{ __html: one.Description }} /> {/* This is the description of the service */}
             <hr />
             <p style={{ fontSize: '16px', color: 'rgba(149, 151, 157, 1)' }}>Product  Type </p>
             <span>{one.ServiceType} </span>
