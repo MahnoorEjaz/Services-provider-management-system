@@ -14,6 +14,7 @@ Routes.post('/login', login);
 Routes.post('/PostProjetService', AuthenticationMiddleware, PostProjetService);
 Routes.put('/DeleteService/:id', AuthenticationMiddleware, DeleteFirst15Services);  // delete request for the service
 Routes.get('/GetAllServicesForallUser', GellAllServicesforall);
+Routes.get('/GetAllServices', AuthenticationMiddleware, GetAllServices1); // get request for the service
 
 module.exports = Routes;   // export the routes
 

@@ -25,22 +25,27 @@ function Header() {
                     </div>
                     <div className={`nav-elements-clint ${isMenuOpen && 'active'}`}   >
                         <ul >
+                            
                             <li>
                                 <input type='text' placeholder='What service are you looking for today?' />
                             </li>
-                            <li>
+
+                            <li style={{marginTop:'-15px'}}>
                                 <Link to="/Notifications"><IoNotifications /></Link>
                             </li>
-                            <li>
+
+                            <li style={{marginTop:'-1px'}}>
                                 <Link to="/like"> <FaHeart /></Link>
                             </li>
+
                             <li>
                                 <Link to="/Inbox"><MailOutlineIcon /></Link>
                             </li>
+
                             <li>
                                 <Link to="/orders"  >Orders </Link>
-
                             </li>
+
                             <li>
                                 <Link to="/seller" style={{ color: 'rgba(29, 191, 115, 1)' }}>Become a Seller</Link>
                             </li>

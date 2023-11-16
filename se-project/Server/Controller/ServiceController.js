@@ -12,8 +12,12 @@ async function GetAllServices1(req, res) {
     const user = await MyUser.findById(userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
-    }
+    }     
     const data = await Service.find({ createdBy: userId, isActive: true });
+    if (!data) {
+      console.log(data);
+      return res.status(404).json({ message: 'Service not found' });
+    } 
     console.log(data.map((service) => service.Gallary.map((image) => image.data)));
     res.status(200).json(data);
   } catch (error) {

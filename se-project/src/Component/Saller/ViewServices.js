@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import ReactLoading from 'react-loading';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const ViewServices = () => {
     const [GetAllServices_, SetGetAllServices] = useState([]);
@@ -25,14 +25,25 @@ const ViewServices = () => {
                         'Authorization': 'Bearer ' + token, // Add the token to the Authorization header/bearer token
                     },
                 });
+                const AllData = await response.json();
+                if (AllData.message === 'Service not found') {
+                    toast.error('User not authenticated');
+                    return;
+                } 
                 if (response.ok) { // if HTTP-status is 200-299 
-                    const AllData = await response.json();
-                    console.log(AllData);
                     SetGetAllServices(AllData); // set the services in the state
                     console.log(AllData);
+                    if (AllData.length === 0) {
+                        toast.error('No Services Found');
+                        // setLoading(false);
+                    }
+                    else {
+                        toast.success('All Services Found');
+                        // setLoading(false);
+                    }
                 } else {
-                    const AllData = await response.json();
-                    console.log(AllData);
+                    toast.error(AllData.message);
+                    console.log(AllData); // log the error message
                 }
                 setLoading(false);
             } catch (error) {
@@ -73,7 +84,7 @@ const ViewServices = () => {
                 <ReactLoading className="page-container"
                     type="bars"
                     color="rgba(29, 191, 115, 1)"
-                    height={50} 
+                    height={50}
                     width={50}
                     position={'center'}
                 />

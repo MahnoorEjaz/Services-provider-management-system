@@ -8,15 +8,25 @@ import { FaHeart } from 'react-icons/fa';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
+import { useEffect } from 'react';
 
 
-export default function BasicCard({ CardData }) {
+export default function BasicCard({ CardData , SimpleImageSlidero}) {
+    
+    const [CardData_, setCardData_] = React.useState(CardData);
+ 
+
 
     const { Current_Service, Set_Current_Service } = React.useContext(AppContext);
+
     const ViewData = () => {
         console.log(CardData);
+        localStorage.setItem('Current_Service', JSON.stringify(CardData));
+        const Data  =  localStorage.getItem('Current_Service');
+        console.log(Data);
+
         Set_Current_Service(CardData);
-    }
+    }  
     const [showNavs_, setnav] = React.useState(false)
     const [liked, setLiked] = useState(false);
     const handleMouseEnter = () => {
@@ -37,29 +47,10 @@ export default function BasicCard({ CardData }) {
 
     const viewDataonpage = () => {
         console.log(CardData);
-        // Set_Current_Service(CardData);
     }
 
     return (
-        // "NumberOfOrders": 0,
-        // "_id": "654f40ae7c0f554825b92100",
-        // "ServiceTitle": "Please Fill This Form To Become a Service Provider",
-        // "BasicPrice": 12,
-        // "Tags": [
-        // "Please Fill This Form To Become a Service Provider"
-        // ],
-        // "ServiceType": "Home Renovation Contractor",
-        // "Description": "<h2>Please Fill This Form To Become a Service Provider</h2><p>\t\t</p>",
-        // "Gallary": [],
-        // "createdBy": {
-        // "_id": "65475b43f4223646fa9f2aa7",
-        // "Name": "saleem Malik"
-        // },
-        // "createdAt": "2023-11-11T08:51:58.615Z",
-        // "updatedAt": null,
-        // "isActive": true,
-        // "__v": 0
-
+       
         <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', margin: '5px' }}>
             <CardMedia >
                 <div onMouseEnter={handleMouseEnter}
@@ -68,7 +59,7 @@ export default function BasicCard({ CardData }) {
                         <SimpleImageSlider
                             width={300}
                             height={200}
-                            images={CardData.Gallary.map(image => ({ url: `data:image/jpeg;base64,${image.data}` }))}
+                            images={SimpleImageSlidero}
                             showBullets={true}
                             showNavs={showNavs_}
                         />

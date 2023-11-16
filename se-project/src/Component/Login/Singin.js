@@ -80,10 +80,6 @@ const SignIn = () => {
         } catch (error) {
             console.error('Error:', error);
         }
-
-
-
-
     };
 
     return (
@@ -181,7 +177,7 @@ const SignIn = () => {
                     <a href='#' style={{ textAlign: 'center', color: 'green' }}> <p>Create New Account</p></a>
                 </div>
             </form>
-            <div style={{textAlign:'center',maxWidth:'40px',marginLeft:'220px',marginTop:'-10px'}}>
+            <div style={{ textAlign: 'center', maxWidth: '40px', marginLeft: '220px', marginTop: '-10px' }}>
                 {
                     isLoading && <Loading type="spin" color="rgba(29, 191, 115, 1)" height={40} width={40} />
                 }

@@ -1,87 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sellar_Cart from '../Saller/Sellar_Cart';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import P1 from '../Pic/P4.jpg'
-import P2 from '../Pic/Gig.png'
-import P3 from '../Pic/Capture1.PNG'
-import P4 from '../Pic/p2.PNG'
+import { Toast } from 'react-toastify';
 
 
 const Top_Rated_slider = () => {
-    const carddata = [
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Professional Web Development Services',
-            Rating: 5,
-            Price: 50,
-            Orders: 100,
-            Name: 'WebDevPro123',
-            type: 'Web Development', // Added the type attribute with the value 'Web Development'
-        },
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Graphic Design and Logo Creation',
-            Rating: 4.5,
-            Price: 40,
-            Orders: 75,
-            Name: 'DesignMaster',
-            type: 'Graphic Design', // Added the type attribute with the value 'Graphic Design'
-        },
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Virtual Assistant for Administrative Tasks',
-            Rating: 4.2,
-            Price: 20,
-            Orders: 50,
-            Name: 'VAExpert',
-            type: 'Virtual Assistant', // Added the type attribute with the value 'Virtual Assistant'
-        },
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Professional Copywriting and Content Writing',
-            Rating: 4.7,
-            Price: 35,
-            Orders: 90,
-            Name: 'CopyWordsmith',
-            type: 'Copywriting', // Added the type attribute with the value 'Copywriting'
-        },
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Video Editing and Post-Production Services',
-            Rating: 4.4,
-            Price: 45,
-            Orders: 60,
-            Name: 'VideoWizard',
-            type: 'Video Editing', // Added the type attribute with the value 'Video Editing'
-        },
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Social Media Marketing and Advertising',
-            Rating: 4.6,
-            Price: 30,
-            Orders: 80,
-            Name: 'SocialMediaGuru',
-            type: 'Social Media', // Added the type attribute with the value 'Social Media'
-        },
-        {
-            url: [P1, P2, P3, P4],
-            title: 'Translation Services for Multiple Languages',
-            Rating: 4.0,
-            Price: 25,
-            Orders: 40,
-            Name: 'LangMaster',
-            type: 'Translation', // Added the type attribute with the value 'Translation'
-        },
-    ];
-    const carouselItems = carddata.map((data, index) => (
-        <div key={index}>
-            <Sellar_Cart CardData={data} />
-        </div>
-    ));
+    const [AllServices, setAllServices] = useState([]);
+    useEffect(() => {
+        const GetUserData = async () => {
+            setAllServices([]);
+            try {
+                const apiUrl = `http://localhost:5000/api/GetAllServicesForallUser`;
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    console.log(data);
+                    setAllServices(data);
+                }
+                else {
+                    console.log('Error');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        GetUserData();
+    }, []);
+    const carouselItems = AllServices
+        .slice(0, 10) // Take only the first 10 elements
+        .map((service, index) => {
+            const imagesForSlider = service.Gallary.map(item => ({ url: item.data }));
+            return (
+                <div key={index}>
+                    <Sellar_Cart CardData={service} SimpleImageSlidero={imagesForSlider} />
+                </div>
+            );
+        });
+
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -100,7 +64,6 @@ const Top_Rated_slider = () => {
             items: 1,
         },
     };
-
     const CustomButtonGroup = ({ next, previous }) => (
         <div className="custom-button-group" style={{ margin: '10px' }}>
             <button className='btn-custom' style={{ marginRight: '10px', borderRadius: '50%', textAlign: 'center' }} onClick={previous}>
@@ -125,6 +88,9 @@ const Top_Rated_slider = () => {
             >
                 {carouselItems}
             </Carousel>
+            <h1 className="text-3xl font-bold underline">
+                Hello world!
+            </h1>
         </div>
     );
 
