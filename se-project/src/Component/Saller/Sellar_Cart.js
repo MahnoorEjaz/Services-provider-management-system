@@ -24,8 +24,7 @@ export default function BasicCard({ CardData , SimpleImageSlidero}) {
         localStorage.setItem('Current_Service', JSON.stringify(CardData));
         const Data  =  localStorage.getItem('Current_Service');
         console.log(Data);
-
-        Set_Current_Service(CardData);
+        Set_Current_Service(CardData); 
     }  
     const [showNavs_, setnav] = React.useState(false)
     const [liked, setLiked] = useState(false);

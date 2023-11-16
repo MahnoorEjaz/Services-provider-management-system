@@ -105,12 +105,10 @@ export const ProfileLeftside = () => {
     return (
         <>
             <div className='profile-leftside-main-div'>
-
                 <div className='Profile-pic' onClick={changeImageDiv} >
                     <img src={image1} alt='Loading...' className='Profile-pic' />  {/* src={UserImage} */}
                     <input type="file" name="Pic1" ref={inputfile1} accept="image/*" onChange={handleImageInput} style={{ display: 'none' }} required />
                 </div>
-
                 <h5 style={{ color: 'rgba(116, 118, 126, 1)' }} >{userName}</h5>
                 <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(116, 118, 126, 1)', }}>
                     <p>
@@ -119,56 +117,56 @@ export const ProfileLeftside = () => {
                     <LinearProgress
                         variant="determinate"
                         value={TotalServices}
-                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px', marginLeft: '50px' }}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '10px', marginLeft: '50px' }}
                         color='success'
                     />
                     <p>
                         <span>{TotalServices}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant'>
+                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
                     <p>
                         Inbox response rate
                     </p>
                     <LinearProgress
                         variant="determinate"
                         value={Inboxresponse}
-                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px' }}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '0px' }}
                         color='success'
                     />
                     <p>
                         <span>{Inboxresponse}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant'>
+                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
                     <p>
                         Order response rate
                     </p>
                     <LinearProgress
                         variant="determinate"
                         value={Orderresponse}
-                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px' }}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '10px' }}
                         color='success'
                     />
                     <p>
                         <span>{Orderresponse}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant'>
+                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
                     <p>
                         Delivered on time
                     </p>
                     <LinearProgress
                         variant="determinate"
                         value={Delivered}
-                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '25px', marginLeft: '10px' }}
+                        style={{ width: '25%', height: '10px', borderRadius: '5px', marginTop: '20px', marginLeft: '10px' }}
                         color='success'
                     />
                     <p>
                         <span>{Delivered}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant'>
+                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
                     <p>Order completion</p>
                     <LinearProgress
                         variant="determinate"

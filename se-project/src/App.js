@@ -8,7 +8,9 @@ import GigView from './Component/Clint/Gig_View';
 import AddNewService from './Component/Saller/AddNewService';
 import CompleteLanding from './Component/Home/CompleteLanding';
 import { ViewProfile } from './Component/Saller/ViewProfile';
+import PlaceOrder from './Component/Clint/PlaceOrder';
 import ReactLoading from 'react-loading';
+
 import './App.css'; // Import your styles
 
 export const AppContext = createContext();
@@ -55,7 +57,7 @@ function App() {
         <AppContext.Provider value={{ Current_Service, Set_Current_Service, HomeHeader, SetHomeHeader }}>
           <ToastContainer />
           <Router>
-            {HomeHeader ? <HeaderClint /> : <HeaderClint />}
+            {HomeHeader ? <HeaderClint /> : <HeaderClint />} 
             <Routes>
               <Route path="/login" element={<CompleteLanding />} />
               <Route path="/ViewAllServices" element={<ClintComplete />} />
@@ -63,6 +65,7 @@ function App() {
               <Route path="/ViewProfile" element={<ViewProfile />} />
               <Route path="/AddNewService" element={<AddNewService />} />
               <Route path="/Current-Saller" element={<GigView  />} />
+              <Route path="/PlaceOrder" element={<PlaceOrder />} /> 
             </Routes> 
           </Router>
         </AppContext.Provider>

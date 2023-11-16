@@ -30,11 +30,11 @@ function Header() {
                                 <input type='text' placeholder='What service are you looking for today?' />
                             </li>
 
-                            <li style={{marginTop:'-15px'}}>
+                            <li style={{marginTop:'-20px'}}>
                                 <Link to="/Notifications"><IoNotifications /></Link>
                             </li>
 
-                            <li style={{marginTop:'-1px'}}>
+                            <li style={{marginTop:'-20px'}}> 
                                 <Link to="/like"> <FaHeart /></Link>
                             </li>
 
