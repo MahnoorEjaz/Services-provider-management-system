@@ -23,7 +23,7 @@ async function DeleteUser(Req, Res) {
     }
 }
 // Update Api to Update the Data in the Database
-async function UpdateUser(req, res) {
+async function AddProfilePic(req, res) { 
     try {
         const userId = req.user.id;
         if (!userId) {
@@ -32,11 +32,12 @@ async function UpdateUser(req, res) {
         }
         const ProfileImage = req.body.ProfileImage; // Get the profile image from the request body
         const service = await MyUser.updateOne({ _id: userId }, { $set: { ProfileImage: ProfileImage } });
-        if (!service) {
-            console.log('User not found');
-            return res.status(404).json({ message: 'User not found' });
-        } // If the service is not found, return a 404 error
-        return res.status(200).json({ message: 'Profile Updated Successfully' }); // Return the updated service
+        if (service.nModified === 0) {
+            return res.status(404).json({ message: 'Service not found' });
+        }
+        else {
+            return res.status(200).json({ message: 'Profile Updated Successfully' }); // Return the updated service
+        }
     } catch (error) {
         console.error('Error during User Updating:', error);
         return res.status(500).json({ message: 'Internal Server Error' }); // Return the updated service
@@ -85,7 +86,7 @@ const GenerateToken = (user) => {
 module.exports = {
     GetUser,
     DeleteUser,
-    UpdateUser,
+    AddProfilePic,
     login,
     Wellcome,
     PostProjetUser,

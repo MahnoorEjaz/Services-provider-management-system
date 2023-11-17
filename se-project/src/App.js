@@ -9,6 +9,7 @@ import AddNewService from './Component/Saller/AddNewService';
 import CompleteLanding from './Component/Home/CompleteLanding';
 import { ViewProfile } from './Component/Saller/ViewProfile';
 import PlaceOrder from './Component/Clint/PlaceOrder';
+import SallerDashboard  from './Component/Saller/SallerDashboard';
 import ReactLoading from 'react-loading';
 
 import './App.css'; // Import your styles
@@ -66,6 +67,7 @@ function App() {
               <Route path="/AddNewService" element={<AddNewService />} />
               <Route path="/Current-Saller" element={<GigView  />} />
               <Route path="/PlaceOrder" element={<PlaceOrder />} /> 
+              <Route path="/SallerDashboard" element={<SallerDashboard />} /> 
             </Routes> 
           </Router>
         </AppContext.Provider>

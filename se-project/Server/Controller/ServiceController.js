@@ -14,11 +14,11 @@ async function GetAllServices1(req, res) {
       return res.status(404).json({ message: 'User not found' });
     }     
     const data = await Service.find({ createdBy: userId, isActive: true });
-    if (!data) {
-      console.log(data);
+    if (!data) { 
+      // console.log(data);
       return res.status(404).json({ message: 'Service not found' });
     } 
-    console.log(data.map((service) => service.Gallary.map((image) => image.data)));
+    // console.log(data.map((service) => service.Gallary.map((image) => image.data)));
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
@@ -49,7 +49,6 @@ async function GellAllServicesforall(req, res) {
   try {
     // Use populate to get the creator information for each service
     const services = await Service.find({isActive:true}).populate('createdBy', 'Name').exec(); // Specify the fields you want to retrieve from the User model
-    console.log(services);
     return res.status(200).json(services);
   } catch (error) {
     console.error(error);

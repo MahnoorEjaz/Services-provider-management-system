@@ -29,18 +29,23 @@ const ViewServices = () => {
                 if (AllData.message === 'Service not found') {
                     toast.error('User not authenticated');
                     return;
-                } 
+                }
                 if (response.ok) { // if HTTP-status is 200-299 
                     SetGetAllServices(AllData); // set the services in the state
-                    console.log(AllData);
                     if (AllData.length === 0) {
                         toast.error('No Services Found');
                         // setLoading(false);
                     }
-                    else {
-                        toast.success('All Services Found');
-                        // setLoading(false);
-                    }
+                    toast.success('All Services Found', {
+                        position: "top-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+
                 } else {
                     toast.error(AllData.message);
                     console.log(AllData); // log the error message

@@ -14,7 +14,7 @@ export const ProfileLeftside = () => {
     const [image1, setImage] = useState(null);
     const [BinaryDataImage, setBinaryDataImage] = useState(null);
     const inputfile1 = React.useRef(null);
-    const [userName , setUserName] = useState('Saller Name');
+    const [userName, setUserName] = useState('Saller Name');
 
     const changeImageDiv = () => {
         inputfile1.current.click();
@@ -32,7 +32,7 @@ export const ProfileLeftside = () => {
                     },
                 });
                 const data = await response.json();
-                console.log(data);  
+                console.log(data);
                 if (response.ok) {
                     setUserName(data.Data.Name);
                     setImage(data.Data.ProfileImage);
@@ -65,7 +65,7 @@ export const ProfileLeftside = () => {
     const AddDataInDatabase = async (BinaryDataImage) => {
         try {
             const token = localStorage.getItem('token');
-            const apiUrl = `http://localhost:5000/api/UPDataUser`;
+            const apiUrl = `http://localhost:5000/api/AddProfilePic`;
             const response = await fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
@@ -74,33 +74,31 @@ export const ProfileLeftside = () => {
                 },
                 body: JSON.stringify({ ProfileImage: BinaryDataImage })
             });
-            const data = await response.json();
-            console.log(data);
+            console.log(response);
             if (response.ok) {
+                const data = await response.json();
                 console.log(data);
-                toast.success('Profile Image Updated Successfully',
-                    {
-                        position: "top-center",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                toast.success('Profile Image Updated Successfully', {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 setBinaryDataImage(BinaryDataImage);
             } else {
-                console.log('Error');
-            } 
+                // Handle non-successful response
+                const errorData = await response.json();
+                console.error(errorData);
+                toast.error('Error updating profile image');
+            }
         } catch (error) {
-            console.log(error);
+            console.error(error);
+            toast.error('An unexpected error occurred');
         }
-    }
-
-
-
-
-
+    };
     return (
         <>
             <div className='profile-leftside-main-div'>
@@ -123,7 +121,7 @@ export const ProfileLeftside = () => {
                         <span>{TotalServices}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
+                <div className='ViewProfile-contant' style={{ marginTop: '20px' }}>
                     <p>
                         Inbox response rate
                     </p>
@@ -137,7 +135,7 @@ export const ProfileLeftside = () => {
                         <span>{Inboxresponse}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
+                <div className='ViewProfile-contant' style={{ marginTop: '20px' }}>
                     <p>
                         Order response rate
                     </p>
@@ -151,7 +149,7 @@ export const ProfileLeftside = () => {
                         <span>{Orderresponse}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
+                <div className='ViewProfile-contant' style={{ marginTop: '20px' }}>
                     <p>
                         Delivered on time
                     </p>
@@ -165,7 +163,7 @@ export const ProfileLeftside = () => {
                         <span>{Delivered}%</span>
                     </p>
                 </div>
-                <div className='ViewProfile-contant' style={{marginTop:'20px'}}>
+                <div className='ViewProfile-contant' style={{ marginTop: '20px' }}>
                     <p>Order completion</p>
                     <LinearProgress
                         variant="determinate"
