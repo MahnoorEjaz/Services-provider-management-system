@@ -187,6 +187,21 @@
 }
 
 
+.cantainer-1 {
+    width: 97%;
+    background: rgba(255, 255, 255, 1);
+    height: 85px;
+    margin: 5px;
+}
+
+.cantainer-2 {
+    width: 97%;
+    background: rgba(255, 255, 255, 1);
+    height: 300px;
+    margin-top: 50px;
+
+}
+
 
 
 
@@ -227,6 +242,10 @@
         margin-left: 80px;
         max-width: 295px;
         /* Adjust the width as needed */
+    }
+    .cantainer {
+        margin-left: 50px;
+        margin-right: -22px;
     }
 }
 
