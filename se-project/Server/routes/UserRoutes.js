@@ -1,7 +1,8 @@
 const Routes = require("express").Router();
 const AuthenticationMiddleware = require('../utils/AuthenticationMiddleware')
-const { GetUser, DeleteUser, login, Wellcome, PostProjetUser,AddProfilePic } = require("../Controller/UserController");
-const { GetAllServices1, DeleteFirst15Services, UpdateService ,GellAllServicesforall, PostProjetService } = require("../Controller/ServiceController");
+const { GetUser, DeleteUser, login, Wellcome, PostProjetUser, AddProfilePic } = require("../Controller/UserController");
+const { GetAllServices1, DeleteFirst15Services, UpdateService, GellAllServicesforall, PostProjetService } = require("../Controller/ServiceController");
+const { AddOrder,GetAllOrder } = require("../Controller/OrderController");
 
 // for the user routes
 Routes.delete("/DeleteUser/:id", DeleteUser);
@@ -15,6 +16,13 @@ Routes.post('/PostProjetService', AuthenticationMiddleware, PostProjetService);
 Routes.put('/DeleteService/:id', AuthenticationMiddleware, DeleteFirst15Services);  // delete request for the service
 Routes.get('/GetAllServicesForallUser', GellAllServicesforall);
 Routes.get('/GetAllServices', AuthenticationMiddleware, GetAllServices1); // get request for the service
+
+//  adding New Order in the Database
+Routes.post('/AddOrder', AuthenticationMiddleware, AddOrder);
+Routes.get('/GetAllOrder', GetAllOrder); // get request for the order
+
+
+
 
 module.exports = Routes;   // export the routes
 

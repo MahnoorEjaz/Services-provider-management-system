@@ -25,7 +25,6 @@ function Header() {
                     </div>
                     <div className={`nav-elements-clint ${isMenuOpen && 'active'}`}   >
                         <ul >
-                            
                             <li>
                                 <input type='text' placeholder='What service are you looking for today?' />
                             </li>

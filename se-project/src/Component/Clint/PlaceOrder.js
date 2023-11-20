@@ -9,20 +9,50 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
     const [textareaValue, setTextareaValue] = useState('');
 
 
-    const handlePlaceOrder = () => {
+    const handlePlaceOrder = async () => {
         if (inputValue.trim() === '') {
             setShowError(true);
         } else {
             console.log('Placing order with address:', inputValue);
             setShowError(false);
             setShowDialog(false);
-            alert('Order Placed Successfully');
             func();
             console.log(Data);
-            const IDUserWhoPlaceOrder = localStorage.getItem('token');
-            const IDUserWhoGetOrder = Data.createdBy._id;
+            const IDUserWhoPlaceOrder= localStorage.getItem('token');
+            let IDUserWhoGetOrder = Data.createdBy._id;
+            const Address = inputValue;
+            const ServiceID = Data._id;
+            const Price = Data.BasicPrice;
+            const Status = "Requested";
+            const createdAt = new Date();
+            const updatedAt = new Date();
+            const isActive = true;
+            const OrderData = {IDUserWhoGetOrder, Address, ServiceID, Price, Status, createdAt, updatedAt, isActive }; // Create an object with the data to be sent to the server
+            console.log(IDUserWhoGetOrder);
+            console.log(Data);
+            const apiUrl = 'http://localhost:5000/api/AddOrder'; // API URL for the backend to be added here later
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + IDUserWhoPlaceOrder, // Add the token to the Authorization header/bearer token
+                    },
+                    body: JSON.stringify(OrderData),
+                });
 
-            toast.success('Order Placed Successfully');
+                const data = await response.json();
+                if (response.ok) { // if HTTP-status is 200-299
+                    toast.success(data.message);
+                    console.log(data.data);
+                } else {
+                    console.error('Error:', response.statusText);
+                    toast.error(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                toast.error(error.message);
+            }
         }
     };
     const handleChatNow = () => {
@@ -45,7 +75,7 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
     };
     const handleChange = (event) => {
         setTextareaValue(event.target.value);
-      };
+    };
     return (
         <>
             <Dialog
