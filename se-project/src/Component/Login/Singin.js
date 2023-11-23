@@ -44,6 +44,7 @@ const SignIn = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevents default refresh by the browser
+        
         const apiUrl = 'http://localhost:5000/api/login';
         try {
             const response = await fetch(apiUrl, {

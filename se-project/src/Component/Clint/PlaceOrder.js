@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Dialog, Textarea, Button } from "@material-tailwind/react";
+import { useNavigate } from 'react-router-dom';
 
 const MyDialogComponent = ({ CheckShow, func, Data }) => {
+    const navigate = useNavigate();
+    const openInNewTab = (url) => {
+        const newTab = window.open(url, '_blank');
+        newTab.focus();
+    }; // Function to open a new tab with the given URL
     const [inputValue, setInputValue] = useState('');
     const [showError, setShowError] = useState(false);
     const [showDialog, setShowDialog] = useState(CheckShow);
     const [textareaValue, setTextareaValue] = useState('');
-
-
     const handlePlaceOrder = async () => {
+
         if (inputValue.trim() === '') {
             setShowError(true);
         } else {
@@ -18,7 +23,7 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
             setShowDialog(false);
             func();
             console.log(Data);
-            const IDUserWhoPlaceOrder= localStorage.getItem('token');
+            const IDUserWhoPlaceOrder = localStorage.getItem('token');
             let IDUserWhoGetOrder = Data.createdBy._id;
             const Address = inputValue;
             const ServiceID = Data._id;
@@ -27,8 +32,9 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
             const createdAt = new Date();
             const updatedAt = new Date();
             const isActive = true;
-            const OrderData = {IDUserWhoGetOrder, Address, ServiceID, Price, Status, createdAt, updatedAt, isActive }; // Create an object with the data to be sent to the server
+            const OrderData = { IDUserWhoGetOrder, Address, ServiceID, Price, Status, createdAt, updatedAt, isActive }; // Create an object with the data to be sent to the server
             console.log(IDUserWhoGetOrder);
+            localStorage.setItem('IDUserWhoGetOrder', IDUserWhoGetOrder);
             console.log(Data);
             const apiUrl = 'http://localhost:5000/api/AddOrder'; // API URL for the backend to be added here later
             try {
@@ -45,6 +51,8 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
                 if (response.ok) { // if HTTP-status is 200-299
                     toast.success(data.message);
                     console.log(data.data);
+                    const newRoute = '/SallerDashboard'; // Create a route to the SallerDashboard page
+                    openInNewTab(newRoute);
                 } else {
                     console.error('Error:', response.statusText);
                     toast.error(data.message);

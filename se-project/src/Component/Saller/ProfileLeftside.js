@@ -105,7 +105,7 @@ export const ProfileLeftside = () => {
                 <div className='Profile-pic' onClick={changeImageDiv} >
                     <img src={image1} alt='Loading...' className='Profile-pic' />  {/* src={UserImage} */}
                     <input type="file" name="Pic1" ref={inputfile1} accept="image/*" onChange={handleImageInput} style={{ display: 'none' }} required />
-                </div>
+                </div> 
                 <h5 style={{ color: 'rgba(116, 118, 126, 1)' }} >{userName}</h5>
                 <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(116, 118, 126, 1)', }}>
                     <p>

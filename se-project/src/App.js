@@ -9,8 +9,10 @@ import AddNewService from './Component/Saller/AddNewService';
 import CompleteLanding from './Component/Home/CompleteLanding';
 import { ViewProfile } from './Component/Saller/ViewProfile';
 import PlaceOrder from './Component/Clint/PlaceOrder';
-import SallerDashboard  from './Component/Saller/SallerDashboard';
+import SallerDashboard from './Component/Saller/SallerDashboard';
 import OrderSelecter from './Component/Saller/OrderSelecter';
+import MapContainer from './Component/Saller/ViewMap';
+import TestingCard from './Component/Saller/textingCard';
 import ReactLoading from 'react-loading';
 
 import './App.css'; // Import your styles
@@ -59,18 +61,24 @@ function App() {
         <AppContext.Provider value={{ Current_Service, Set_Current_Service, HomeHeader, SetHomeHeader }}>
           <ToastContainer />
           <Router>
-            {HomeHeader ? <HeaderClint /> : <HeaderClint />} 
+            {HomeHeader ? <HeaderClint /> : <HeaderClint />}
             <Routes>
               <Route path="/login" element={<CompleteLanding />} />
               <Route path="/ViewAllServices" element={<ClintComplete />} />
               <Route path="/AddNewService" element={<AddNewService />} />
-              <Route path="/ViewProfile" element={<ViewProfile />} />        
+              <Route path="/ViewProfile" element={<ViewProfile />} />
               <Route path="/AddNewService" element={<AddNewService />} />
-              <Route path="/Current-Saller" element={<GigView  />} />
+              <Route path="/Current-Saller" element={<GigView />} />
               <Route path="/PlaceOrder" element={<PlaceOrder />} /> 
-              <Route path="/SallerDashboard" element={<SallerDashboard />} /> 
+          
+              <Route path="/ViewMap" element={<MapContainer />} />
+              <Route path="/TestingCard" element={<TestingCard />} />
+            
+              {/* Open New table  */}
+              <Route path="/SallerDashboard" element={<SallerDashboard />} />
               <Route path="/OrderSelecter" element={<OrderSelecter />} />
-            </Routes> 
+
+            </Routes>
           </Router>
         </AppContext.Provider>
       )}

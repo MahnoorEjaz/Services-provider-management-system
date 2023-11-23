@@ -6,7 +6,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 var Images_ = [];
-const Gallary = ({handlePostData,data}) => {
+const Gallary = ({ handlePostData, data }) => {
   const [image1, setImage] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
@@ -63,8 +63,7 @@ const Gallary = ({handlePostData,data}) => {
       const newImages = URL.createObjectURL(file);
       setImage3(newImages);
     }
-   
-  }
+  } 
   const SaveData = () => {
     if (image1 === null || image2 === null || image3 === null) {
       setMessageSent(true);
@@ -112,12 +111,14 @@ const Gallary = ({handlePostData,data}) => {
             }
             <input type="file" name="Pic1" ref={inputfile2} accept="image/*" onChange={handleImageChangeImage2} style={{ display: 'none' }} required />
           </div>
+
           <div className='Gallary-Images' onClick={changeImageImage3} >
             {
               image3 ? <img src={image3} alt='image' /> : <img src={ImageUpLoader} alt='image' />
             }
             <input type="file" name="Pic1" ref={inputfile3} accept="image/*" onChange={handleImageChangeImage3} style={{ display: 'none' }} required />
           </div>
+
         </div>
         <input
           type='submit'

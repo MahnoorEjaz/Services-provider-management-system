@@ -2,7 +2,7 @@ const Routes = require("express").Router();
 const AuthenticationMiddleware = require('../utils/AuthenticationMiddleware')
 const { GetUser, DeleteUser, login, Wellcome, PostProjetUser, AddProfilePic } = require("../Controller/UserController");
 const { GetAllServices1, DeleteFirst15Services, UpdateService, GellAllServicesforall, PostProjetService } = require("../Controller/ServiceController");
-const { AddOrder,GetAllOrder } = require("../Controller/OrderController");
+const { AddOrder,GetAllOrder ,CheckOrderStatus} = require("../Controller/OrderController");
 
 // for the user routes
 Routes.delete("/DeleteUser/:id", DeleteUser);
@@ -20,6 +20,9 @@ Routes.get('/GetAllServices', AuthenticationMiddleware, GetAllServices1); // get
 //  adding New Order in the Database
 Routes.post('/AddOrder', AuthenticationMiddleware, AddOrder);
 Routes.get('/GetAllOrder', GetAllOrder); // get request for the order
+Routes.post('/CheckOrder', AuthenticationMiddleware, CheckOrderStatus); // get request for the order 
+
+
 
 
 
