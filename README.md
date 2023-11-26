@@ -32,5 +32,5 @@ To run this project locally, you need to have the following dependencies install
 
 
 ## Run the Application:
-npm start
+- NPM Start
 Open your web browser and go to http://localhost:3000 to view the application.
