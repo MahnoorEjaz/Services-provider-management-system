@@ -29,22 +29,18 @@ function Header() {
                                 <input type='text' placeholder='What service are you looking for today?' />
                             </li>
 
-                            <li style={{marginTop:'-20px'}}>
-                                <Link to="/Notifications"><IoNotifications /></Link>
+                            <li style={{ marginTop: '-20px' }}>
+                                <Link to="/ViewAllServices"><IoNotifications /></Link>
                             </li>
-
-                            <li style={{marginTop:'-20px'}}> 
+                            <li style={{ marginTop: '-20px' }}>
                                 <Link to="/like"> <FaHeart /></Link>
                             </li>
-
                             <li>
                                 <Link to="/Inbox"><MailOutlineIcon /></Link>
                             </li>
-
                             <li>
                                 <Link to="/orders"  >Orders </Link>
                             </li>
-
                             <li>
                                 <Link to="/seller" style={{ color: 'rgba(29, 191, 115, 1)' }}>Become a Seller</Link>
                             </li>

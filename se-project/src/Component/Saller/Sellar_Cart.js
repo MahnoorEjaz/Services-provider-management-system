@@ -11,10 +11,10 @@ import { AppContext } from '../../App';
 import { useEffect } from 'react';
 
 
-export default function BasicCard({ CardData , SimpleImageSlidero}) {
-    
+export default function BasicCard({ CardData, SimpleImageSlidero }) {
+
     const [CardData_, setCardData_] = React.useState(CardData);
- 
+
 
 
     const { Current_Service, Set_Current_Service } = React.useContext(AppContext);
@@ -22,10 +22,10 @@ export default function BasicCard({ CardData , SimpleImageSlidero}) {
     const ViewData = () => {
         console.log(CardData);
         localStorage.setItem('Current_Service', JSON.stringify(CardData));
-        const Data  =  localStorage.getItem('Current_Service');
+        const Data = localStorage.getItem('Current_Service');
         console.log(Data);
-        Set_Current_Service(CardData); 
-    }  
+        Set_Current_Service(CardData);
+    }
     const [showNavs_, setnav] = React.useState(false)
     const [liked, setLiked] = useState(false);
     const handleMouseEnter = () => {
@@ -34,9 +34,11 @@ export default function BasicCard({ CardData , SimpleImageSlidero}) {
     const handleMouseLeave = () => {
         setnav(false);
     }
-    const toggleLike = () => {
+    const toggleLike = (ServiceID) => {
         setLiked(!liked);
+
     };
+
     const iconColor = liked ? 'rgba(255, 190, 91, 1)' : 'rgba(116, 118, 126, 1)';
     const iconStyle = {
         fontSize: '20px',
@@ -49,7 +51,7 @@ export default function BasicCard({ CardData , SimpleImageSlidero}) {
     }
 
     return (
-       
+
         <div className='Saller-Card' style={{ maxWidth: '300px', height: '450px', cursor: 'pointer', overflow: 'hidden', borderBottom: '1px solid rgba(34, 35, 37, 1)', margin: '5px' }}>
             <CardMedia >
                 <div onMouseEnter={handleMouseEnter}
@@ -62,7 +64,7 @@ export default function BasicCard({ CardData , SimpleImageSlidero}) {
                             showBullets={true}
                             showNavs={showNavs_}
                         />
-                    )} 
+                    )}
                 </div>
             </CardMedia>
             <CardContent sx={{ border: '1px solid rgba(34, 35, 37, 1)', borderTop: '1px solid white', height: '150%' }}>
@@ -77,12 +79,12 @@ export default function BasicCard({ CardData , SimpleImageSlidero}) {
                 </div>
                 <Divider />
                 <div style={{ display: 'flex', justifyContent: 'space-between', maxHeight: '150%' }}>
-                    <FaHeart style={iconStyle} onClick={toggleLike} />
+                    <FaHeart style={iconStyle} onClick={toggleLike(CardData._id)} />
                     <div>
                         <p style={{ color: 'rgba(116, 118, 126, 1)' }}>
                             Started At <br />
                             ${CardData.BasicPrice}
-                        </p>
+                        </p> 
                     </div>
                 </div>
             </CardContent>

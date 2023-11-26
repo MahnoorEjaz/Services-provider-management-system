@@ -73,18 +73,16 @@ function App() {
               <Route path="/AddNewService" element={<AddNewService />} />
               <Route path="/Current-Saller" element={<GigView />} />
               <Route path="/PlaceOrder" element={<PlaceOrder />} />
-
+              <Route path="/seller" element={<AddNewService />} />
               <Route path="/ViewMap" element={<MapContainer />} />
               <Route path="/TestingCard" element={<TestingCard />} />
-
-              {/* // Receiver65492d7645f3221c1b30ada4 */}
-
               <Route path='/Inbox' element={<Chat Sender={Sender} Receiver={Receiver} />} />
-
-              {/* Open New table  */}
               <Route path="/SallerDashboard" element={<SallerDashboard />} />
               <Route path="/OrderSelecter" element={<OrderSelecter />} />
 
+              {/* If page is Not Fond than Opne Landing Page */}
+
+              <Route path="*" element={<CompleteLanding />} />
             </Routes>
           </Router>
         </AppContext.Provider>
