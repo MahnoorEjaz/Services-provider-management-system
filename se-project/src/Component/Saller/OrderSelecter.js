@@ -18,6 +18,7 @@ const OrderSelecter = () => {
     const [OrderData, SetOrderData] = React.useState([]);
     const [OrderStatus, SetOrderStatus] = React.useState('Requested');
     const [Showmap, SetShowmap] = React.useState(false);
+    const [Address, SetAddress] = React.useState('');
 
     useEffect(() => {
         SetNewOrder(false);
@@ -103,7 +104,10 @@ const OrderSelecter = () => {
         }
         handleClose(); // Close the menu after handling the click
     };
-
+    const ShoeMap = (address) => {
+        SetShowmap(!Showmap);
+        SetAddress(address);
+    }
 
 
     return (
@@ -138,7 +142,7 @@ const OrderSelecter = () => {
                                         >
                                             <MenuItem onClick={handleAcceptOffer}>Accept Offer</MenuItem>
                                             <MenuItem onClick={() => handleRejectOffer(order._id)} >Reject Offer</MenuItem>
-                                            <MenuItem onClick={handleClose}>View Location</MenuItem>
+                                            <MenuItem onClick={() => { ShoeMap(order.Address) }}>View Location</MenuItem>
                                             <MenuItem onClick={handleClose}>Chat Now</MenuItem>
 
                                             {/* Add other menu items as needed */}
@@ -225,11 +229,8 @@ const OrderSelecter = () => {
 
                 </div>
             </div>
-
-            {
-                Showmap && <MapContainer /> // Show the map if Showmap is true
-            }
-        </>
+            {Showmap && <MapContainer address={Address} />}
+        </> 
     );
 
 };
