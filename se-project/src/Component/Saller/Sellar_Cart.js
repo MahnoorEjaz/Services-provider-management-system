@@ -8,17 +8,11 @@ import { FaHeart } from 'react-icons/fa';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
-import { useEffect } from 'react';
-
+import { toast } from 'react-toastify';
 
 export default function BasicCard({ CardData, SimpleImageSlidero }) {
-
     const [CardData_, setCardData_] = React.useState(CardData);
-
-
-
     const { Current_Service, Set_Current_Service } = React.useContext(AppContext);
-
     const ViewData = () => {
         console.log(CardData);
         localStorage.setItem('Current_Service', JSON.stringify(CardData));
@@ -34,12 +28,62 @@ export default function BasicCard({ CardData, SimpleImageSlidero }) {
     const handleMouseLeave = () => {
         setnav(false);
     }
-    const toggleLike = (ServiceID) => {
-        setLiked(!liked);
+    const toggleLike = async (ServiceID) => {
+        if (liked === false) {
+            setLiked(true);
+        } else {
+            setLiked(false); // If the user clicks the button again, unlike it
+            return;
+        }
+        const token = localStorage.getItem('token');
+        if (liked === true) {
+            try {
+                const apiUrl = `http://localhost:5000/api/LikeGig`;
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: JSON.stringify({ ServiceID: ServiceID })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    console.log(data);
+                    toast.success(data.message);
+                } else {
+                    console.log('Error');
+                    toast.error('Error in the server');
 
-    };
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        else {
+            try {
+                alert('Removed'); 
+                const apiUrl = `http://localhost:5000/api/RemoveServiceFromLiked?ID=${ServiceID}`;
+                const response = fetch(apiUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                });
+                if (response.ok) {
+                    console.log('Removed');
+                    toast.success('Removed');
+                } else {
+                    console.log('Error');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 
-    const iconColor = liked ? 'rgba(255, 190, 91, 1)' : 'rgba(116, 118, 126, 1)';
+    const iconColor = liked ? 'rgba(255, 190, 91, 1)' :null; //'rgba(255, 190, 91, 1)
     const iconStyle = {
         fontSize: '20px',
         marginTop: '20px',
@@ -79,12 +123,12 @@ export default function BasicCard({ CardData, SimpleImageSlidero }) {
                 </div>
                 <Divider />
                 <div style={{ display: 'flex', justifyContent: 'space-between', maxHeight: '150%' }}>
-                    <FaHeart style={iconStyle} onClick={toggleLike(CardData._id)} />
+                    <FaHeart style={iconStyle} onClick={() => toggleLike(CardData._id)} />
                     <div>
                         <p style={{ color: 'rgba(116, 118, 126, 1)' }}>
                             Started At <br />
                             ${CardData.BasicPrice}
-                        </p> 
+                        </p>
                     </div>
                 </div>
             </CardContent>

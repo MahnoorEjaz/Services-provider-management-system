@@ -67,7 +67,9 @@ function App() {
             {HomeHeader ? <HeaderClint /> : <HeaderClint />}
             <Routes>
               <Route path="/login" element={<CompleteLanding />} />
-              <Route path="/ViewAllServices" element={<ClintComplete />} />
+            
+               <Route path="/ViewAllServices" element={<ClintComplete />} />
+            
               <Route path="/AddNewService" element={<AddNewService />} />
               <Route path="/ViewProfile" element={<ViewProfile />} />
               <Route path="/AddNewService" element={<AddNewService />} />
@@ -79,10 +81,10 @@ function App() {
               <Route path='/Inbox' element={<Chat Sender={Sender} Receiver={Receiver} />} />
               <Route path="/SallerDashboard" element={<SallerDashboard />} />
               <Route path="/OrderSelecter" element={<OrderSelecter />} />
-
+              
               {/* If page is Not Fond than Opne Landing Page */}
 
-              <Route path="*" element={<CompleteLanding />} />
+              <Route path="*" element={<CompleteLanding />} />  
             </Routes>
           </Router>
         </AppContext.Provider>

@@ -4,6 +4,8 @@ const { GetUser, DeleteUser, IDUser, login, AllData, PostProjetUser, AddProfileP
 const { GetAllServices1, DeleteFirst15Services, UpdateService, GellAllServicesforall, PostProjetService } = require("../Controller/ServiceController");
 const { AddOrder, GetAllOrder, CheckOrderStatus ,ChnageOrderStatus} = require("../Controller/OrderController");
 const { AddMessage, GetAllMessages, GetAllMessages_2, GetAllMessages_1 } = require("../Controller/MessageControler");
+const {LikeGigService,RemoveLikeGigService} = require("../Controller/LikeServices");
+
 const { Route } = require("react-router-dom");
 
 // for the user routes
@@ -35,6 +37,10 @@ Routes.get('/GetAllMessages_1', GetAllMessages_1); // get request for the order
 Routes.get('/GetAllMessages_2', GetAllMessages_2); // get request for the order 
 Routes.get('/AllUsers', AllData); // get request for the order
 
+
+// add like gig 
+Routes.post('/LikeGig', AuthenticationMiddleware, LikeGigService);
+Routes.delete('/RemoveServiceFromLiked', AuthenticationMiddleware, RemoveLikeGigService);
 
 
 

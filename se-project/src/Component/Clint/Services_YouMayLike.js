@@ -44,15 +44,10 @@ const Top_Rated_slider = () => {
                                 <Sellar_Card CardData={card} SimpleImageSlidero={imagesForSlider} />
                             </Grid>
                         );
-
-
                     }
                     )
                 }
-
             </Grid>
-
-
         </div>
     );
 

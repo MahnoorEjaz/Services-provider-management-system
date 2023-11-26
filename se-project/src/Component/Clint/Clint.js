@@ -30,7 +30,7 @@ function Header() {
                             </li>
 
                             <li style={{ marginTop: '-20px' }}>
-                                <Link to="/ViewAllServices"><IoNotifications /></Link>
+                                <Link to="/ViewAllSerjvices"><IoNotifications /></Link>
                             </li>
                             <li style={{ marginTop: '-20px' }}>
                                 <Link to="/like"> <FaHeart /></Link>
