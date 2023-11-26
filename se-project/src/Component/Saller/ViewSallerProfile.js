@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const ProfileLeftside = () => {
+export const UserProfile = ({ UserID }) => {
     const TotalServices = 100;
     const Inboxresponse = 100;
     const Orderresponse = 100;
@@ -22,14 +22,9 @@ export const ProfileLeftside = () => {
     useEffect(() => {
         const GetUserData = async () => {
             try {
-                const token = localStorage.getItem('token');
-                const apiUrl = `http://localhost:5000/api/GetUser`;
+                const apiUrl = `http://localhost:5000/api/GetUserByID?ID=${UserID}`;
                 const response = await fetch(apiUrl, {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token,
-                    },
                 });
                 const data = await response.json();
                 console.log(data);
@@ -64,20 +59,14 @@ export const ProfileLeftside = () => {
 
     const AddDataInDatabase = async (BinaryDataImage) => {
         try {
-            const token = localStorage.getItem('token');
-            const apiUrl = `http://localhost:5000/api/AddProfilePic`;
+            const apiUrl = `http://localhost:5000/api/AddProfilePicBYID?ID=${UserID}`;
             const response = await fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token,
                 },
                 body: JSON.stringify({ ProfileImage: BinaryDataImage })
             });
-
-
-
-
             console.log(response);
             if (response.ok) {
                 const data = await response.json();

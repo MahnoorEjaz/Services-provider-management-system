@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');// Middleware function to validate JWT token
 function validateToken(req, res, next) {
     var token = req.headers.authorization;
     token = token.split(' ')[1] 
+    console.log(token);
     if (!token) {
         return res.status(401).json({ message: 'No token provided' });
     } jwt.verify(token, '652ec29f3beb5a545122b2ed2321@##*&^^', (err, decoded) => {

@@ -65,8 +65,8 @@ const SignIn = () => {
                     setMessageSent(true);
                     setSeverity('success');
                     ValidUser();
-                    navigate('/ViewProfile'); // Navigate to the home page after 2 seconds delay
-                    setFormData({
+                    navigate('/ViewAllServices'); // Navigate to the home page after 2 seconds delay
+                    setFormData({ 
                         Email: '',
                         Password: '',
                     });

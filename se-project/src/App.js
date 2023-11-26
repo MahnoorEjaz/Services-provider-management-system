@@ -13,12 +13,13 @@ import SallerDashboard from './Component/Saller/SallerDashboard';
 import OrderSelecter from './Component/Saller/OrderSelecter';
 import MapContainer from './Component/Saller/ViewMap';
 import TestingCard from './Component/Saller/textingCard';
+import Chat from './Component/Saller/textingCard';
 import ReactLoading from 'react-loading';
-
 import './App.css'; // Import your styles
 
 export const AppContext = createContext();
-
+const Sender = localStorage.getItem('Sender');
+const Receiver = localStorage.getItem('Receiver');
 function App() {
   const emptyData = {
     url: [],
@@ -34,6 +35,8 @@ function App() {
   const [Current_Service, Set_Current_Service] = useState(emptyData);
   const [HomeHeader, SetHomeHeader] = useState(false);
   const [UserToken, SetUserToken] = useState('');
+
+
 
   useEffect(() => {
     // Simulate loading delay (replace this with actual data fetching logic)
@@ -69,11 +72,15 @@ function App() {
               <Route path="/ViewProfile" element={<ViewProfile />} />
               <Route path="/AddNewService" element={<AddNewService />} />
               <Route path="/Current-Saller" element={<GigView />} />
-              <Route path="/PlaceOrder" element={<PlaceOrder />} /> 
-          
+              <Route path="/PlaceOrder" element={<PlaceOrder />} />
+
               <Route path="/ViewMap" element={<MapContainer />} />
               <Route path="/TestingCard" element={<TestingCard />} />
-            
+
+              {/* // Receiver65492d7645f3221c1b30ada4 */}
+
+              <Route path='/Inbox' element={<Chat Sender={Sender} Receiver={Receiver} />} />
+
               {/* Open New table  */}
               <Route path="/SallerDashboard" element={<SallerDashboard />} />
               <Route path="/OrderSelecter" element={<OrderSelecter />} />

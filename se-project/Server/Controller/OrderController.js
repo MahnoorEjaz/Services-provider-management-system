@@ -6,11 +6,8 @@ const Order = require('../Models/Order');
 async function AddOrder(req, res) {
     try {
         const { IDUserWhoGetOrder, Address, ServiceID, Price, Status } = req.body;
+        console.log(IDUserWhoGetOrder)
         const IDUserWhoPlaceOrder = req.user.id;
-        if (!IDUserWhoPlaceOrder) {
-            console.log('User not authenticated');
-            return res.status(401).json({ message: 'User not authenticated' });
-        }
         const existingOrder = await Order.findOne({
             IDUserWhoPlaceOrder,
             IDUserWhoGetOrder,
@@ -68,9 +65,6 @@ async function CheckOrderStatus(req, res) {
 }
 
 
-
-
-
 // Get all the Order from the Database
 async function GetAllOrder(req, res) {
     try {
@@ -82,8 +76,37 @@ async function GetAllOrder(req, res) {
 }
 
 
+
+
+// Change the Order Status from the Database 
+async function ChnageOrderStatus(req, res) {
+    const OrderID = req.query.ID;
+    console.log(OrderID);
+    try {
+        // Inprocess", "Completed", "Cancelled", "Requested
+        const order = await Order.findByIdAndUpdate(OrderID, { Status: "Cancelled" }, { new: true });
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        else {
+            return res.status(200).json({ message: 'Order Status Updated Successfully' }); // Return the updated service
+        }
+    } catch (error) {
+        console.error('Error during User Updating:', error);
+        return res.status(500).json({ message: 'Internal Server Error' }); // Return the updated service
+    }
+}
+
+
+
+
+
+
+
+
 module.exports = {
     AddOrder,
     GetAllOrder,
     CheckOrderStatus,
+    ChnageOrderStatus,
 };

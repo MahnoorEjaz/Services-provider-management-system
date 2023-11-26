@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Dialog, Textarea, Button } from "@material-tailwind/react";
 import { useNavigate } from 'react-router-dom';
+import Chat from '../Saller/textingCard';
 
-const MyDialogComponent = ({ CheckShow, func, Data }) => {
+
+const MyDialogComponent = ({ CheckShow, func, Data, ShowChatComponent }) => {
     const navigate = useNavigate();
     const openInNewTab = (url) => {
         const newTab = window.open(url, '_blank');
@@ -13,11 +15,15 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
     const [showError, setShowError] = useState(false);
     const [showDialog, setShowDialog] = useState(CheckShow);
     const [textareaValue, setTextareaValue] = useState('');
+    const [Sender, SetSender] = useState('');
+    const [Receiver, SetReciver] = useState('');
+    const [ShowChat, SetShowChat] = useState(false);
     const handlePlaceOrder = async () => {
 
         if (inputValue.trim() === '') {
             setShowError(true);
         } else {
+            ShowChatComponent();
             console.log('Placing order with address:', inputValue);
             setShowError(false);
             setShowDialog(false);
@@ -36,7 +42,7 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
             console.log(IDUserWhoGetOrder);
             localStorage.setItem('IDUserWhoGetOrder', IDUserWhoGetOrder);
             console.log(Data);
-            const apiUrl = 'http://localhost:5000/api/AddOrder'; // API URL for the backend to be added here later
+            const apiUrl = 'http://localhost:5000/api/NewOrder'; // API URL for the backend to be added here later
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
@@ -46,12 +52,17 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
                     },
                     body: JSON.stringify(OrderData),
                 });
-
                 const data = await response.json();
                 if (response.ok) { // if HTTP-status is 200-299
                     toast.success(data.message);
-                    console.log(data.data);
+                    console.log(data.data.IDUserWhoPlaceOrder);
+                    const IDUserWhoPlaceOrder = data.data.IDUserWhoPlaceOrder;
+                    localStorage.setItem('Sender', IDUserWhoPlaceOrder);
+                    localStorage.setItem('Receiver', IDUserWhoGetOrder); // Store the ID of the user who placed the order in the local storage
                     const newRoute = '/SallerDashboard'; // Create a route to the SallerDashboard page
+                    SetSender(IDUserWhoPlaceOrder);
+                    SetReciver(IDUserWhoGetOrder)
+                    SetShowChat(true);
                     openInNewTab(newRoute);
                 } else {
                     console.error('Error:', response.statusText);
@@ -160,7 +171,9 @@ const MyDialogComponent = ({ CheckShow, func, Data }) => {
                     </div>
                 </div>
             </Dialog>
-
+            {
+                ShowChat && <Chat Sender={Sender} Receiver={Receiver} />
+            }
         </>
     );
 };

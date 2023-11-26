@@ -11,13 +11,13 @@ const messageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'MyUser', // Reference to the User model
     },
-    Message: {
+    UserMessage: {
         type: String,
         required: true,
     },
     Status: {
         type: String,
-        enum: ['Send', 'Recived'],
+        enum: ['Send', 'Received'],
     },
     Image: {
         type: String,
