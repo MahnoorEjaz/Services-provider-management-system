@@ -23,7 +23,7 @@ To run this project locally, you need to have the following dependencies install
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/Services-provider-management-system.git
+   git clone https://github.com/MahnoorEjaz/Services-provider-management-system.git
 
 ## Install Dependencies:
 npm install
